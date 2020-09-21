@@ -33,6 +33,8 @@ public class WarGameController : MonoBehaviour
             await UniTask.WhenAll(task1, task2);
 
             // 両方のプレイヤーが選択するの待ち
+            player1.ReleaseChoiceCard();
+            player2.ReleaseChoiceCard();
             var task3 = player1.PlayerChoiceCard();
             var task4 = player2.PlayerChoiceCard();
             var choiceCards = await UniTask.WhenAll(task3, task4);
