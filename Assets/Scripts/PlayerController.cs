@@ -28,13 +28,16 @@ public class PlayerController : MonoBehaviour
     }
 
     // ユーザが選択したカードを返す。必ず await すること。
-    public async UniTask<Card> PlayerChoiceCard()
+    public async UniTask<Card> PlayerChoiceCard(bool isRemovePlayerCard)
     {
         // 所持カードのどれかが選択状態になるのを待つ
         // （大富豪とか複数枚選べるゲームはここで調整）
         await UniTask.WaitUntil(()=> cardList.Any(card => card.isChoiced));
         var choiceCard = cardList.First(card => card.isChoiced);
-        
+
+        // この時点で必要なら所持カードから解放する
+        if(isRemovePlayerCard) cardList.Remove(choiceCard);
+
         return choiceCard;
     }
     
@@ -44,26 +47,18 @@ public class PlayerController : MonoBehaviour
         for (int i = 0; i < cardList.Count; i++)
             cardList[i].SetChoice(isChoice:false);
     }
-
-    // カードを返す
-    public Card GetCard(Card card)
-    {
-        // TODO : 指定したカードを返し、所持カードリストから削除
-        return null;
-    }
     
     ////////////////////////////////////////////
     /// WarGamePlayerController: PlayerControllerBase
     ////////////////////////////////////////////
     [SerializeField] private RectTransform WinGetCardParent;
     public List<Card> winGetCardList { get; private set; } = new List<Card>();
+
+    // 勝った2枚のカードを雑に移動
     public async UniTask SetWinCard(Card winGetCard)
     {
-        winGetCardList.Add(winGetCard);
-
-        // 勝った2枚のカードを雑に移動
+        Debug.Log("勝者カード移動。winGetCard:" + winGetCard , this);
         winGetCard.MoveCard(WinGetCardParent, WinGetCardParent.localPosition, isLittleShit:true);
+        winGetCardList.Add(winGetCard);
     }
-
-
 }

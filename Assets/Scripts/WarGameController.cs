@@ -35,8 +35,8 @@ public class WarGameController : MonoBehaviour
             // 両方のプレイヤーが選択するの待ち
             player1.ReleaseChoiceCard();
             player2.ReleaseChoiceCard();
-            var task3 = player1.PlayerChoiceCard();
-            var task4 = player2.PlayerChoiceCard();
+            var task3 = player1.PlayerChoiceCard(isRemovePlayerCard:true);
+            var task4 = player2.PlayerChoiceCard(isRemovePlayerCard:true);
             var choiceCards = await UniTask.WhenAll(task3, task4);
 
             // 両方のカードを表向きにする
@@ -49,6 +49,8 @@ public class WarGameController : MonoBehaviour
             // 1回の対戦;
             if (player1Card.cardNo == player2Card.cardNo)
             {
+                Debug.Log("引き分け");
+
                 // 引き分け
                 var hikwakeCardPos = HikiwakeCardPatent.localPosition;
                 var task7 = player1Card.MoveCard(HikiwakeCardPatent, hikwakeCardPos, isLittleShit:true);
@@ -59,6 +61,7 @@ public class WarGameController : MonoBehaviour
             {
                 // どっちか勝ち_カード移動
                 var winner = (player1Card.cardNo > player2Card.cardNo) ? player1 : player2;
+                Debug.Log("勝者:" + winner);
                 var task5 = winner.SetWinCard(player1Card);
                 var task6 = winner.SetWinCard(player2Card);
                 await UniTask.WhenAll(task5, task6);
