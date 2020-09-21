@@ -23,7 +23,10 @@ public class PlayerController : MonoBehaviour
         {
             var card = cardList[i];
             var parent = cardPosParent;
-            card.MoveCard(parent, parent.localPosition).Forget();
+            if (card != null)
+            {
+                card.MoveCard(parent, parent.localPosition).Forget();
+            }
         }
     }
 
@@ -45,7 +48,10 @@ public class PlayerController : MonoBehaviour
     public void ReleaseChoiceCard()
     {
         for (int i = 0; i < cardList.Count; i++)
-            cardList[i].SetChoice(isChoice:false);
+        {
+            if(cardList[i] != null)
+                cardList[i].SetChoice(isChoice:false);
+        }
     }
     
     ////////////////////////////////////////////

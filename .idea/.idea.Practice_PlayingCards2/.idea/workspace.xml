@@ -11,9 +11,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b478a8ed-63ea-428f-a59f-daed2dc2b478" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.Practice_PlayingCards2/.idea/contentModel.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Practice_PlayingCards2/.idea/contentModel.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Practice_PlayingCards2/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Practice_PlayingCards2/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Cardbase.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Cardbase.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/PlayerController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/PlayerController.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -32,11 +31,11 @@
       <list>
         <option value="$PROJECT_DIR$/Assets/Scripts/Card.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/DeckController.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/PlayerController.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/WarGameController.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/SingletonMonoBehaviour.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/ResourceManager.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Cardbase.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/PlayerController.cs" />
       </list>
     </option>
   </component>
@@ -86,7 +85,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1600501554133</updated>
-      <workItem from="1600501562672" duration="25659000" />
+      <workItem from="1600501562672" duration="26295000" />
     </task>
     <servers />
   </component>
