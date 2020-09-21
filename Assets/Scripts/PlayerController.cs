@@ -52,5 +52,18 @@ public class PlayerController : MonoBehaviour
         return null;
     }
     
-    
+    ////////////////////////////////////////////
+    /// WarGamePlayerController: PlayerControllerBase
+    ////////////////////////////////////////////
+    [SerializeField] private RectTransform WinGetCardParent;
+    public List<Card> winGetCardList { get; private set; } = new List<Card>();
+    public async UniTask SetWinCard(Card winGetCard)
+    {
+        winGetCardList.Add(winGetCard);
+
+        // 勝った2枚のカードを雑に移動
+        winGetCard.MoveCard(WinGetCardParent, WinGetCardParent.localPosition, isLittleShit:true);
+    }
+
+
 }

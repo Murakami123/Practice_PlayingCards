@@ -8,6 +8,7 @@ public class WarGameController : MonoBehaviour
 {
     [SerializeField] private DeckController deckController;
     [SerializeField] private PlayerController[] playerController = new PlayerController[2]; // 2人対戦
+    [SerializeField] private RectTransform HikiwakeCardPatent; 
     private PlayerController player1 => playerController[0];
     private PlayerController player2 => playerController[1];
     private int useJokerCount = 2; // 1にしたいけど奇数だと最後1枚余る
@@ -33,15 +34,36 @@ public class WarGameController : MonoBehaviour
             // 両方のプレイヤーが選択するの待ち
             var task3 = player1.PlayerChoiceCard();
             var task4 = player2.PlayerChoiceCard();
-            await UniTask.WhenAll(task3, task4);
+            var choiceCards = await UniTask.WhenAll(task3, task4);
 
-            // await カード比較;
-            // await 勝った方のカード置き場にカード置く。引き分けなら少し横によせる。
-            // await 少し横によせるカードがあるなら、勝った方のカード置き場にカード置く。
-            
+            // 1回の対戦;
+            var player1Card = choiceCards.Item1;
+            var player2Card = choiceCards.Item2;
+            if (player1Card.cardNo == player2Card.cardNo)
+            {
+                // 引き分け
+                var hikwakeCardPos = HikiwakeCardPatent.localPosition;
+                var task7 = player1Card.MoveCard(HikiwakeCardPatent, hikwakeCardPos, isLittleShit:true);
+                var task8 = player2Card.MoveCard(HikiwakeCardPatent, hikwakeCardPos, isLittleShit:true);
+                await UniTask.WhenAll(task7, task8);
+            }
+            else
+            {
+                // どっちか勝ち_カード移動
+                var winner = (player1Card.cardNo > player2Card.cardNo) ? player1 : player2;
+                var task5 = winner.SetWinCard(player1Card);
+                var task6 = winner.SetWinCard(player2Card);
+                await UniTask.WhenAll(task5, task6);
+            }            
         }
 
         // 勝敗引き分けチェック
+        if (player1.winGetCardList.Count == player2.winGetCardList.Count)
+        {
+            // 引き分け
+            
+        }
+        
         
     }
 
@@ -51,6 +73,7 @@ public class WarGameController : MonoBehaviour
         player.AddCard(drawCard);
     }
 
+   
     // ◆トランプゲーム共通であったらよさそうな概念
     // ○GameControllerBase
     //      ・（「実際のトランプの場合、ユーザが行うが自動で行った方がよいもの」等を実行する）

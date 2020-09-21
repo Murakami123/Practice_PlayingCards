@@ -27,12 +27,19 @@ public abstract class Cardbase : MonoBehaviour
         gameObject.SetActive(true);
     }
 
-    public async UniTask MoveCard(Transform cardParent, Vector3 movePos)
+    public async UniTask MoveCard(Transform cardParent, Vector3 movePos, bool isLittleShit = false)
     {
         // Hierarcy上の親変更
         transform.SetParent(cardParent);
         
         // 位置の移動
+        if (isLittleShit)
+        {
+            var randomPosX = UnityEngine.Random.Range(-30f, 30f);
+            var randomPosY = UnityEngine.Random.Range(-30f, 30f);
+            movePos += new Vector3(randomPosX, randomPosY,0f);
+        }
+
         await UniTask.Delay(200);
         rectTransform.DOLocalMove(movePos, 0.2f);
     }
@@ -66,7 +73,6 @@ public abstract class Cardbase : MonoBehaviour
     }
 
     /////////////////////////////////////////////////////////////////////
-
     /// タップや長押し関連
     /////////////////////////////////////////////////////////////////////
 

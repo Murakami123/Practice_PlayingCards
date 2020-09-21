@@ -3,9 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="b478a8ed-63ea-428f-a59f-daed2dc2b478" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Practice_PlayingCards2/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Practice_PlayingCards2/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Card.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Card.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/Cardbase.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Cardbase.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/DeckController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/DeckController.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/PlayerController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/PlayerController.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/WarGameController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/WarGameController.cs" afterDir="false" />
     </list>
@@ -74,7 +72,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1600501554133</updated>
-      <workItem from="1600501562672" duration="15698000" />
+      <workItem from="1600501562672" duration="18937000" />
     </task>
     <servers />
   </component>
