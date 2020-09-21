@@ -17,6 +17,8 @@ public class DeckController : MonoBehaviour
 
         // カード生成
         cardList.Clear();
+        Debug.Log("shuffledCardList.Count:" + shuffledCardList.Count);
+        
         for (int i = 0; i < shuffledCardList.Count; i++)
         {
             var card = Instantiate(cardPrefab, cardPrefab.transform.parent);
@@ -32,7 +34,17 @@ public class DeckController : MonoBehaviour
     //     return null;
     // }
 
-    public Card GetCard() => (cardList.Count > 0) ? cardList[cardList.Count - 1] : null;
+    public Card GetCard()
+    {
+        Card card = null;
+        if (cardList.Count > 0)
+        {
+            card = cardList[cardList.Count - 1];
+            cardList.RemoveAt(cardList.Count - 1);
+        }
+        return  card;
+    }
+
     public int GetDeckCardCount => cardList.Count;
     //      ☑ シャッフルすることができる。
     //      ・ カードを山札に戻すことができる。

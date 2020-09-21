@@ -24,7 +24,8 @@ public class WarGameController : MonoBehaviour
         deckController.ResetDeck(useJokerCount);
 
         // 山札なくなるまで対戦繰り返し
-        while (deckController.GetDeckCardCount <=0)
+        Debug.Log("deckController.GetDeckCardCount:" + deckController.GetDeckCardCount);
+        while (deckController.GetDeckCardCount >=0)
         {
             // プレイヤーにカードを配る
             var task1 = DistributeCard( player1 );
@@ -61,18 +62,32 @@ public class WarGameController : MonoBehaviour
         if (player1.winGetCardList.Count == player2.winGetCardList.Count)
         {
             // 引き分け
-            
+            GameEnd_Hikiwake();
         }
-        
-        
+        else
+        {
+            var isPlayer1win = (player1.winGetCardList.Count > player2.winGetCardList.Count);
+            if (isPlayer1win)
+                GameEnd_Player1Win();
+            else 
+                GameEnd_Player2Win();
+        }
     }
 
     private async UniTask DistributeCard(PlayerController player)
     {
         var drawCard = deckController.GetCard();
+        Debug.Log("drawCard:" + drawCard);
         player.AddCard(drawCard);
     }
 
+    /////////////////////////////////////////////////////
+    // 勝敗表示
+    /////////////////////////////////////////////////////    
+    [SerializeField] private GameObject player1WinObj, player2WinObj, gameHikiwakeObj; 
+    private void GameEnd_Player1Win(){ player1WinObj.SetActive(true);}
+    private void GameEnd_Player2Win(){ player2WinObj.SetActive(true);}
+    private void GameEnd_Hikiwake(){ gameHikiwakeObj.SetActive(true);}
    
     // ◆トランプゲーム共通であったらよさそうな概念
     // ○GameControllerBase
