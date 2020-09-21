@@ -86,19 +86,6 @@ public abstract class Cardbase : MonoBehaviour
     }
 
     public void OnTap() => SetChoice(isChoice: true);
-
-    // private UnityAction tapCallBack;
-    // public void ResetTapCallback() => tapCallBack = null;
-
-    // public async UniTask<Card> SetTapCallBack(UnityAction callback)
-
-    // {
-    //     tapCallBack = callback;
-    // }
-    //
-    
-    
-
 }
 
 public enum CardSoot

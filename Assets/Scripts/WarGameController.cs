@@ -25,8 +25,9 @@ public class WarGameController : MonoBehaviour
 
         // 山札なくなるまで対戦繰り返し
         Debug.Log("deckController.GetDeckCardCount:" + deckController.GetDeckCardCount);
-        while (deckController.GetDeckCardCount >=0)
+        while (deckController.GetDeckCardCount >0)
         {
+            Debug.Log("残り山札枚数；" + deckController.GetDeckCardCount);
             // プレイヤーにカードを配る
             var task1 = DistributeCard( player1 );
             var task2 = DistributeCard( player2 );
@@ -42,6 +43,8 @@ public class WarGameController : MonoBehaviour
             // 両方のカードを表向きにする
             var player1Card = choiceCards.Item1;
             var player2Card = choiceCards.Item2;
+            player1Card.SetChoice(false); // 選択中表示終了
+            player2Card.SetChoice(false); 
             var task9  = player1Card.ReturnCard(isShowFront:true);
             var task10 = player2Card.ReturnCard(isShowFront:true);
             await UniTask.WhenAll(task9, task10);

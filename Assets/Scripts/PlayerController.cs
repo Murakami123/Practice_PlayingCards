@@ -37,7 +37,7 @@ public class PlayerController : MonoBehaviour
         // （大富豪とか複数枚選べるゲームはここで調整）
         await UniTask.WaitUntil(()=> cardList.Any(card => card.isChoiced));
         var choiceCard = cardList.First(card => card.isChoiced);
-
+        
         // この時点で必要なら所持カードから解放する
         if(isRemovePlayerCard) cardList.Remove(choiceCard);
 
