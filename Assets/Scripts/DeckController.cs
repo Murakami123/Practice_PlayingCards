@@ -7,12 +7,13 @@ public class DeckController : MonoBehaviour
     [SerializeField] private Card cardPrefab;
 
     private List<Card> cardList = new List<Card>();
+    private readonly float cardThickness = 0.65f;
     public void ResetDeck(int useJokerCount)
     {
         // 全カードリセット
         var sootAndNoList = DefaltSootAndNoList(useJokerCount);
         var shuffledCardList = CardShuffle(sootAndNoList); // シャッフル
-        var instancePosY = 0.00f;
+        var instancePosY = 0.0f;
 
         // カード生成
         cardList.Clear();
@@ -21,16 +22,18 @@ public class DeckController : MonoBehaviour
             var card = Instantiate(cardPrefab, cardPrefab.transform.parent);
             card.Init(new Vector3(0f, instancePosY, 0f), shuffledCardList[i].Item1, shuffledCardList[i].Item2);
             cardList.Add(card);
-            instancePosY += 0.01f;
+            instancePosY += cardThickness;
         }
     }
 
-    public Card GetCard()
-    {
-        if (cardList.Count > 0) return cardList[cardList.Count-1];
-        return null;
-    }
-    
+    // public Card GetCard()
+    // {
+    //     if (cardList.Count > 0) return cardList[cardList.Count-1];
+    //     return null;
+    // }
+
+    public Card GetCard() => (cardList.Count > 0) ? cardList[cardList.Count - 1] : null;
+    public int GetDeckCardCount => cardList.Count;
     //      ☑ シャッフルすることができる。
     //      ・ カードを山札に戻すことができる。
     //      ・ 全てのカードを山札に戻すことができる（ゲームリトライ）。

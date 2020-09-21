@@ -4,18 +4,19 @@ using UnityEngine;
 using UnityEngine.UI;
 using DG.Tweening;
 using Cysharp.Threading.Tasks;
+using UnityEngine.Events;
 
 public abstract class Cardbase : MonoBehaviour
 {
     [SerializeField] Image cardImage;
     [SerializeField] Sprite frontSpr;
     [SerializeField] Sprite backSpr;
-    public CardSoot soot { get; private set; }    
-    public int cardNo { get; private set; }    
-    public bool isShowFront { get; private set; }
-
     RectTransform _rect;
-    private RectTransform rectTransform => (_rect) ? _rect : _rect = GetComponent<RectTransform>(); 
+    private RectTransform rectTransform => (_rect) ? _rect : _rect = GetComponent<RectTransform>();
+    public CardSoot soot { get; private set; }
+    public int cardNo { get; private set; }
+    public bool isShowFront { get; private set; }
+    private  readonly Vector3 rotation90 = new Vector3(0f, 90f, 0f);
     
     public virtual void  Init( Vector3 anchorPos, CardSoot soot, int cardNo, bool isShowFront = false)
     {
@@ -26,7 +27,16 @@ public abstract class Cardbase : MonoBehaviour
         gameObject.SetActive(true);
     }
 
-    private  readonly Vector3 rotation90 = new Vector3(0f, 90f, 0f);
+    public async UniTask MoveCard(Transform cardParent, Vector3 movePos)
+    {
+        // Hierarcy上の親変更
+        transform.SetParent(cardParent);
+        
+        // 位置の移動
+        await UniTask.Delay(200);
+        rectTransform.DOLocalMove(movePos, 0.2f);
+    }
+
     public async UniTask ReturnCard(bool isShowFront, bool isImmidiate = false)
     {
         // 表のカードをひっくり返して表、裏のカードをひっくり返して裏の挙動は必要なさそう
@@ -54,6 +64,28 @@ public abstract class Cardbase : MonoBehaviour
             }
         }
     }
+
+    /////////////////////////////////////////////////////////////////////
+
+    /// タップや長押し関連
+    /////////////////////////////////////////////////////////////////////
+
+    public bool isChoiced { get; private set; } // カードが選択されてるかどうか
+    public void SetChoice(bool isChoice) => isChoiced = isChoice;
+    public void OnTap() => SetChoice(isChoice: true);
+
+    // private UnityAction tapCallBack;
+    // public void ResetTapCallback() => tapCallBack = null;
+
+    // public async UniTask<Card> SetTapCallBack(UnityAction callback)
+
+    // {
+    //     tapCallBack = callback;
+    // }
+    //
+    
+    
+
 }
 
 public enum CardSoot
