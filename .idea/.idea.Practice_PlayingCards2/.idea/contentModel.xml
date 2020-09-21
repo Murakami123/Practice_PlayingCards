@@ -201,6 +201,8 @@
           <e p="Cardbase.cs" t="Include" />
           <e p="DeckController.cs" t="Include" />
           <e p="PlayerController.cs" t="Include" />
+          <e p="ResourceManager.cs" t="Include" />
+          <e p="SingletonMonoBehaviour.cs" t="Include" />
           <e p="WarGameController.cs" t="Include" />
         </e>
         <e p="仮.txt" t="Include" />

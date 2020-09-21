@@ -9,9 +9,9 @@ using UnityEngine.Events;
 public abstract class Cardbase : MonoBehaviour
 {
     [SerializeField] Image cardImage;
-    [SerializeField] Sprite frontSpr;
     [SerializeField] Sprite backSpr;
-    RectTransform _rect;
+    private Sprite frontSpr;
+    private RectTransform _rect;
     private RectTransform rectTransform => (_rect) ? _rect : _rect = GetComponent<RectTransform>();
     public CardSoot soot { get; private set; }
     public int cardNo { get; private set; }
@@ -23,6 +23,7 @@ public abstract class Cardbase : MonoBehaviour
         this.soot = soot;  
         this.cardNo = cardNo;
         this.isShowFront = isShowFront;
+        this.frontSpr = ResourceManager.Instance.GetSprite(soot, cardNo);
         rectTransform.anchoredPosition = anchorPos;
         gameObject.SetActive(true);
     }
