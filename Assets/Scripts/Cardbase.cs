@@ -76,8 +76,14 @@ public abstract class Cardbase : MonoBehaviour
     /// タップや長押し関連
     /////////////////////////////////////////////////////////////////////
 
+    [SerializeField] private GameObject sentakuzumiObj;
     public bool isChoiced { get; private set; } // カードが選択されてるかどうか
-    public void SetChoice(bool isChoice) => isChoiced = isChoice;
+    public void SetChoice(bool isChoice)
+    {
+        isChoiced = isChoice;
+        sentakuzumiObj.SetActive(isChoiced);
+    }
+
     public void OnTap() => SetChoice(isChoice: true);
 
     // private UnityAction tapCallBack;

@@ -37,9 +37,14 @@ public class WarGameController : MonoBehaviour
             var task4 = player2.PlayerChoiceCard();
             var choiceCards = await UniTask.WhenAll(task3, task4);
 
-            // 1回の対戦;
+            // 両方のカードを表向きにする
             var player1Card = choiceCards.Item1;
             var player2Card = choiceCards.Item2;
+            var task9  = player1Card.ReturnCard(isShowFront:true);
+            var task10 = player2Card.ReturnCard(isShowFront:true);
+            await UniTask.WhenAll(task9, task10);
+            
+            // 1回の対戦;
             if (player1Card.cardNo == player2Card.cardNo)
             {
                 // 引き分け

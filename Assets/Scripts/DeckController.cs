@@ -114,7 +114,7 @@ public class DeckController : MonoBehaviour
 
         for (int i = 0; i < jokerCount; i++)
         {
-            list.Add((CardSoot.Joker, -1));
+            list.Add((CardSoot.Joker, 14));
         }
 
         return list;
