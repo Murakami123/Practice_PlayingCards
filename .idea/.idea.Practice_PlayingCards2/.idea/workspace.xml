@@ -12,8 +12,7 @@
   <component name="ChangeListManager">
     <list default="true" id="b478a8ed-63ea-428f-a59f-daed2dc2b478" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Practice_PlayingCards2/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Practice_PlayingCards2/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Cardbase.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Cardbase.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/PlayerController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/PlayerController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scenes/SampleScene.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/SampleScene.unity" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/WarGameController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/WarGameController.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -36,8 +35,8 @@
         <option value="$PROJECT_DIR$/Assets/Scripts/SingletonMonoBehaviour.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/ResourceManager.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Cardbase.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/WarGameController.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/PlayerController.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/WarGameController.cs" />
       </list>
     </option>
   </component>
@@ -57,6 +56,7 @@
     <property name="node.js.path.for.package.tslint" value="project" />
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
     <property name="node.js.selected.package.tslint" value="(autodetect)" />
+    <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="RunManager" selected="Attach to Unity Editor.Attach to Unity Editor">
@@ -87,7 +87,10 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1600501554133</updated>
-      <workItem from="1600501562672" duration="27119000" />
+      <workItem from="1600501562672" duration="33592000" />
+      <workItem from="1601503057728" duration="138000" />
+      <workItem from="1601503231050" duration="84000" />
+      <workItem from="1601511186752" duration="638000" />
     </task>
     <servers />
   </component>
@@ -106,11 +109,20 @@
         </entry>
       </map>
     </option>
+    <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
   </component>
   <component name="WindowStateProjectService">
+    <state x="-1206" y="449" key="#com.intellij.ide.actions.ChooseComponentsToExportDialog" timestamp="1601503006808">
+      <screen x="-1920" y="0" width="1920" height="1160" />
+    </state>
+    <state x="-1206" y="449" key="#com.intellij.ide.actions.ChooseComponentsToExportDialog/-1920.0.1920.1160/0.0.1920.1160@-1920.0.1920.1160" timestamp="1601503006808" />
+    <state x="-1452" y="225" key="SettingsEditor" timestamp="1601503079489">
+      <screen x="-1920" y="0" width="1920" height="1160" />
+    </state>
+    <state x="-1452" y="225" key="SettingsEditor/-1920.0.1920.1160/0.0.1920.1160@-1920.0.1920.1160" timestamp="1601503079489" />
     <state x="640" y="185" width="640" height="829" key="find.popup" timestamp="1600691621718">
       <screen x="0" y="0" width="1920" height="1200" />
     </state>
