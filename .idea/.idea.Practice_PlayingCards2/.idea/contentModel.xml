@@ -560,17 +560,29 @@
           </e>
         </e>
         <e p="Scripts" t="Include">
-          <e p="Card.cs" t="Include" />
-          <e p="Cardbase.cs" t="Include" />
-          <e p="DeckController.cs" t="Include" />
+          <e p="AlgoGame" t="Include">
+            <e p="AlgoGameController.cs" t="Include" />
+          </e>
           <e p="PhotonPractice" t="Include">
             <e p="MonsterScript.cs" t="Include" />
+            <e p="PhotonManager.cs" t="Include" />
             <e p="SimplePun.cs" t="Include" />
           </e>
-          <e p="PlayerController.cs" t="Include" />
-          <e p="ResourceManager.cs" t="Include" />
-          <e p="SingletonMonoBehaviour.cs" t="Include" />
-          <e p="WarGameController.cs" t="Include" />
+          <e p="TitleScene" t="Include">
+            <e p="TitleSceneController.cs" t="Include" />
+          </e>
+          <e p="Util" t="Include">
+            <e p="DontDestrouOnLoad.cs" t="Include" />
+            <e p="ResourceManager.cs" t="Include" />
+          </e>
+          <e p="WarGame" t="Include">
+            <e p="Card.cs" t="Include" />
+            <e p="Cardbase.cs" t="Include" />
+            <e p="DeckController.cs" t="Include" />
+            <e p="PlayerController.cs" t="Include" />
+            <e p="SingletonMonoBehaviour.cs" t="Include" />
+            <e p="WarGameController.cs" t="Include" />
+          </e>
         </e>
         <e p="仮.txt" t="Include" />
       </e>
