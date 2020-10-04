@@ -9,7 +9,7 @@ using Cysharp.Threading.Tasks;
 public class AlgoGameController : MonoBehaviour
 {
     private bool isOnLineMode => PhotonManager.Instance.isApplicationOnlineMode; // オンライン対戦かどうか
-    private readonly string randomRoomName = "randomRoom_Algo";
+    private readonly string randomRoomName = "randomRoom_Algo_";
     private async UniTask Start()
     {
         if (isOnLineMode)
@@ -31,10 +31,9 @@ public class AlgoGameController : MonoBehaviour
         if (Input.GetKey("up"))
         {
             Debug.Log("bbb");
-            var posX = UnityEngine.Random.Range(-300f, 300f);
-            var posY = UnityEngine.Random.Range(-300f, 300f);
-            var obj = PhotonManager.Instance.Instantiate("testPrefab", new Vector3(posX, posY,0), (Quaternion)default );
-            obj.transform.SetParent(prefabParent, false);
+            var posX = UnityEngine.Random.Range(-5f, 5f);
+            var posY = UnityEngine.Random.Range(-5f, 5f);
+            var obj = PhotonManager.Instance.Instantiate("Photon_Cube", new Vector3(posX, posY,0), (Quaternion)default );
         }
     }
 }
