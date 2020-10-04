@@ -8,6 +8,10 @@ using Cysharp.Threading.Tasks;
 public class PhotonManager : MonoBehaviour
 {
     public static PhotonManager Instance { get; private set; }
+
+    /// <summary>
+    /// オンラインONOFF切り替え
+    /// </summary>
     public bool isApplicationOnlineMode { get; private set; }
 
     public async UniTask SetAppricationOnlineMode(bool isOnline)
@@ -56,4 +60,12 @@ public class PhotonManager : MonoBehaviour
     {
         return PhotonNetwork.NetworkClientState;
     }
+
+    /// <summary>
+    /// 各種メソッド
+    /// </summary>
+ 
+    // 生成
+    public GameObject Instantiate(string prefabName, Vector3 position, Quaternion rotation, byte group = 0, object[] data = null)
+        => PhotonNetwork.Instantiate(prefabName, position, rotation, group, data);
 }

@@ -11,23 +11,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b478a8ed-63ea-428f-a59f-daed2dc2b478" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.Practice_PlayingCards2/.idea/contentModel.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Practice_PlayingCards2/.idea/contentModel.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Practice_PlayingCards2/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Practice_PlayingCards2/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenes/TitleScene.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/TitleScene.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Card.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Card.cs.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Cardbase.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Cardbase.cs.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/DeckController.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/DeckController.cs.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/PlayerController.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/PlayerController.cs.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/ResourceManager.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/ResourceManager.cs.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/SingletonMonoBehaviour.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/SingletonMonoBehaviour.cs.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/WarGameController.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/WarGameController.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scenes/AlgoGameScene.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/AlgoGameScene.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scenes/TestPhotonScene.unity" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scenes/TestPhotonScene.unity.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/AlgoGame/AlgoGameController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/AlgoGame/AlgoGameController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/PhotonPractice/PhotonManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/PhotonPractice/PhotonManager.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjectSettings/EditorBuildSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/EditorBuildSettings.asset" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -58,9 +48,9 @@
         <option value="$PROJECT_DIR$/Assets/Scripts/PhotonPractice/MonsterScript.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Util/DontDestrouOnLoad.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/PhotonPractice/SimplePun.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/AlgoGame/AlgoGameController.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/PhotonPractice/PhotonManager.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/TitleScene/TitleSceneController.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/PhotonPractice/PhotonManager.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/AlgoGame/AlgoGameController.cs" />
       </list>
     </option>
   </component>
@@ -80,7 +70,7 @@
     <property name="node.js.path.for.package.tslint" value="project" />
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
     <property name="node.js.selected.package.tslint" value="(autodetect)" />
-    <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
+    <property name="settings.editor.selected.configurable" value="ParameterNameHintsOptionsId" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="RunManager" selected="Attach to Unity Editor.Attach to Unity Editor">
@@ -114,7 +104,7 @@
       <workItem from="1600501562672" duration="33592000" />
       <workItem from="1601503057728" duration="138000" />
       <workItem from="1601503231050" duration="84000" />
-      <workItem from="1601511186752" duration="4921000" />
+      <workItem from="1601511186752" duration="12290000" />
     </task>
     <servers />
   </component>
@@ -143,18 +133,23 @@
       <screen x="-1920" y="0" width="1920" height="1160" />
     </state>
     <state x="-1206" y="449" key="#com.intellij.ide.actions.ChooseComponentsToExportDialog/-1920.0.1920.1160/0.0.1920.1160@-1920.0.1920.1160" timestamp="1601503006808" />
-    <state x="-1452" y="225" key="SettingsEditor" timestamp="1601503079489">
-      <screen x="-1920" y="0" width="1920" height="1160" />
+    <state x="468" y="225" key="SettingsEditor" timestamp="1601786430259">
+      <screen x="0" y="0" width="1920" height="1160" />
     </state>
     <state x="-1452" y="225" key="SettingsEditor/-1920.0.1920.1160/0.0.1920.1160@-1920.0.1920.1160" timestamp="1601503079489" />
+    <state x="468" y="225" key="SettingsEditor/-1920.0.1920.1160/0.0.1920.1160@0.0.1920.1160" timestamp="1601786430259" />
+    <state x="92" y="92" width="1736" height="976" key="VCS.FileHistoryDialog" timestamp="1601785671702">
+      <screen x="0" y="0" width="1920" height="1160" />
+    </state>
+    <state x="92" y="92" width="1736" height="976" key="VCS.FileHistoryDialog/-1920.0.1920.1160/0.0.1920.1160@0.0.1920.1160" timestamp="1601785671702" />
     <state x="640" y="185" width="640" height="829" key="find.popup" timestamp="1600691621718">
       <screen x="0" y="0" width="1920" height="1200" />
     </state>
     <state x="640" y="179" width="640" height="801" key="find.popup/-1920.0.1920.1160/0.0.1920.1160@0.0.1920.1160" timestamp="1600504920899" />
     <state x="640" y="185" width="640" height="829" key="find.popup/-1920.0.1920.1200/0.0.1920.1200@0.0.1920.1200" timestamp="1600691621718" />
-    <state x="623" y="255" width="672" height="678" key="search.everywhere.popup" timestamp="1600690707090">
+    <state x="623" y="255" width="672" height="678" key="search.everywhere.popup" timestamp="1601783479438">
       <screen x="0" y="0" width="1920" height="1160" />
     </state>
-    <state x="623" y="255" width="672" height="678" key="search.everywhere.popup/-1920.0.1920.1160/0.0.1920.1160@0.0.1920.1160" timestamp="1600690707090" />
+    <state x="623" y="255" width="672" height="678" key="search.everywhere.popup/-1920.0.1920.1160/0.0.1920.1160@0.0.1920.1160" timestamp="1601783479438" />
   </component>
 </project>
