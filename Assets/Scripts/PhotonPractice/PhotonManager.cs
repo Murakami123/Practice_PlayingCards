@@ -1,11 +1,15 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 using Photon.Pun;
 using Photon.Realtime;
 using Cysharp.Threading.Tasks;
+using UnityEngine.UI;
+using System.Linq;
+
 
 // public class PhotonManager : MonoBehaviourPunCallbacks
-public class PhotonManager : MonoBehaviour
+public class PhotonManager : MonoBehaviourPunCallbacks
 {
     public static PhotonManager Instance { get; private set; }
 
@@ -38,14 +42,23 @@ public class PhotonManager : MonoBehaviour
         PhotonNetwork.ConnectUsingSettings();
     }
 
-    /// <summary>
-    /// 部屋入出
-    /// </summary>
-    private bool isWaitingRoomJoin;
+    /////////////////////////////////////////////////////
+    /// ロビー、ルーム関連
+    /////////////////////////////////////////////////////
 
+    // // ロビーに入る機能。
+    // public async UniTask JoinLobby()
+    // {
+    //     Debug.Log("ロビーに入る");
+    //     PhotonNetwork.JoinLobby();
+    //     await UniTask.WaitUntil(() => GetNetworkClientState() == ClientState.JoinedLobby); // ルーム入室待ち
+    //     Debug.Log("ロビーに入った");
+    // }
+
+    /// 部屋入出
     public async UniTask JoinOrCreateRoom(string roomName)
     {
-        isWaitingRoomJoin = true;
+        // isWaitingRoomJoin = true;
         PhotonNetwork.JoinOrCreateRoom(roomName, new RoomOptions(), TypedLobby.Default);
         Debug.Log("部屋入るの待ち");
 
@@ -54,14 +67,14 @@ public class PhotonManager : MonoBehaviour
 
         // ◆ ルーム入室待ち_B案
         await UniTask.WaitUntil(() => GetNetworkClientState() == ClientState.Joined); // ルーム入室待ち
-        
+
         Debug.Log("部屋入るの待ち_終わり");
     }
 
-    private async UniTask OnJoinedRoom()
+    private void OnJoinedRoom()
     {
-        Debug.Log("部屋入った！");
-        isWaitingRoomJoin = false;
+        // Debug.Log("部屋入った！");
+        // isWaitingRoomJoin = false;
     }
 
     // クライアントの現在の情報を返す
@@ -70,11 +83,10 @@ public class PhotonManager : MonoBehaviour
         return PhotonNetwork.NetworkClientState;
     }
 
-    /// <summary>
+    /////////////////////////////////////////////////////
     /// 各種メソッド
-    /// </summary>
-
-    // 生成
+    /////////////////////////////////////////////////////
+    // Photon 的な生成（世界に生成）
     public GameObject Instantiate(string prefabName, Vector3 position, Quaternion rotation, byte group = 0,
         object[] data = null)
     {
@@ -82,6 +94,41 @@ public class PhotonManager : MonoBehaviour
         Debug.Log("生成");
         return PhotonNetwork.Instantiate(prefabName, position, rotation, group, data);
     }
+
+    // プレイヤーの人数が揃うの待ち
+    public async UniTask WaitPlayerGetTogether(string roomName, int gamePlayerCount)
+    {
+        // ◆案1_入室中の部屋
+        var room = PhotonNetwork.CurrentRoom;
+
+        // ◆案2_部屋一覧からこの部屋の情報を取得（ルーム情報更新が呼ばれないから取れない）
+        // var room = roomInfoList.Find(roomInfo => roomInfo.Name == roomName);
+
+        if (room == null)
+            Debug.LogError("おかしい。roomName" + roomName + ", roomInfoList.Count:" + roomInfoList.Count);
+        else Debug.Log("現在の人数。ルーム名:" + room.Name + ", 人数:" + room.PlayerCount);
+
+        await UniTask.WaitUntil(() => room.PlayerCount == gamePlayerCount);
+        Debug.Log("人数揃った");
+    }
+
+    // タグ名の obj の子にする
+    public static void SetAnchoredPos(RectTransform rect, Vector3 anchoredPos, string parentTagName)
+    {
+        var parentObj = GameObject.FindWithTag(parentTagName);
+        rect.SetParent(parentObj.transform);
+        rect.anchoredPosition = anchoredPos;
+    }
+
+    // GetRoomListは一定時間ごとに更新され、その更新のタイミングで実行する処理
+    // ルームリストに更新があった時
+    private List<RoomInfo> roomInfoList = new List<RoomInfo>(); // 最新のルーム一覧情報
+    public override void OnRoomListUpdate(List<RoomInfo> roomList)
+    { 
+        Debug.Log("ルーム情報更新。ルーム数:" + roomList.Count);
+        // =>
+        roomInfoList = roomList;
+    }   
 }
 
 public class PhotonProperty : MonoBehaviour

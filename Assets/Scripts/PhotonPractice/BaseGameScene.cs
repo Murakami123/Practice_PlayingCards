@@ -5,21 +5,15 @@ using UnityEngine;
 
 public abstract class BaseGameScene : MonoBehaviour
 {
-    // オンライン対戦かどうか
-    // protected bool isOnLineMode
-    // {
-    //     get { return PhotonManager.Instance.isApplicationOnlineMode; }
-    // }
-
     protected bool isOnLineMode => PhotonManager.Instance.isApplicationOnlineMode;
-
     protected abstract string randomRoomName { get; }
+    protected abstract int gamePlayerCount { get; } // このゲームに何人参加するか
 
     protected async UniTask JoinOrCreateRoom()
     {
         if (isOnLineMode)
         {
-            Debug.Log("randomRoomName:" + randomRoomName);
+            Debug.Log("部屋入るの待ち");
             await PhotonManager.Instance.JoinOrCreateRoom(randomRoomName);
             Debug.Log("部屋入った");
         }

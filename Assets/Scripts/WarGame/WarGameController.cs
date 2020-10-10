@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Cysharp.Threading.Tasks;
 using Cysharp.Threading.Tasks.Linq;
+using Photon.Pun;
 using Photon.Realtime;
 
 public class WarGameController : BaseGameScene
@@ -11,11 +12,11 @@ public class WarGameController : BaseGameScene
     /////////////////////////////////////////////////////
     /// 基本形
     /////////////////////////////////////////////////////        
-    protected override string randomRoomName
-    {
-        get { return "randomRoom_War"; }
-    }
+    protected override string randomRoomName => "randomRoom_War1";
 
+    protected override int gamePlayerCount => 2;
+    private readonly Vector3 anchoredPos_Player1 = new Vector3(0f, -250f, 0f);
+    private readonly Vector3 anchoredPos_Player2 = new Vector3(0f, 250f, 0f);
     private async UniTask Start() => MainFlow().Forget();
 
     /////////////////////////////////////////////////////
@@ -36,6 +37,22 @@ public class WarGameController : BaseGameScene
         Debug.Log("WarGameController.Start_1");
         await base.JoinOrCreateRoom();
         Debug.Log("WarGameController.Start_2");
+
+        // 部屋の人数が揃うの待ち（部屋の人数そろってから、具体的な Photon の挙動始める）
+        await PhotonManager.Instance.WaitPlayerGetTogether(randomRoomName, gamePlayerCount);
+        Debug.Log("ゲームを始める");
+
+        // （ログ）
+        var currentRoom = PhotonNetwork.CurrentRoom;
+        Debug.Log("MasterClientId:" + currentRoom.MasterClientId);
+        foreach (var player in currentRoom.Players)
+            Debug.Log("player.Key:" + player.Key + ", player.Value:" + player.Value);
+
+        
+        // 自分の PlayerPrefab を作り、部屋に共有。
+        var playerObj = PhotonManager.Instance.Instantiate("PlayerPrefab", Vector3.zero, (Quaternion) default);
+        var playerRect = playerObj.GetComponent<RectTransform>();
+        PhotonManager.SetAnchoredPos(playerRect, anchoredPos_Player1, "PlayerParent");
 
         // 山札リセット
         Debug.Log("WarGameController.MainFlow");

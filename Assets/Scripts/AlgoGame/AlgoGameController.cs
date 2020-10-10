@@ -8,17 +8,20 @@ using Cysharp.Threading.Tasks;
 
 public class AlgoGameController : BaseGameScene
 {
+    /////////////////////////////////////////////////////
+    /// 基本形
+    /////////////////////////////////////////////////////        
+    protected override string randomRoomName => "randomRoom_Algo";
 
-    protected override string randomRoomName
-    {
-        get { return "randomRoom_Algo"; }
-    }
-    private async UniTask Start()
-    {
-        // 部屋がなければ作って入る
-        if (isOnLineMode)
-            await PhotonManager.Instance.JoinOrCreateRoom(randomRoomName);
+    protected override int gamePlayerCount => 2;
+    private async UniTask Start() => MainFlow().Forget();
 
+    /////////////////////////////////////////////////////
+    /// シーンのごとの処理
+    /////////////////////////////////////////////////////
+    private async UniTask MainFlow()
+    {
+        
     }
     void OnGUI()
     {
@@ -27,6 +30,7 @@ public class AlgoGameController : BaseGameScene
     }
 
     [SerializeField] private Transform prefabParent;
+
     private void Update()
     {
         Debug.Log("aaa");
@@ -35,12 +39,10 @@ public class AlgoGameController : BaseGameScene
             Debug.Log("bbb");
             var posX = UnityEngine.Random.Range(-5f, 5f);
             var posY = UnityEngine.Random.Range(-5f, 5f);
-            var obj = PhotonManager.Instance.Instantiate("Photon_Cube", new Vector3(posX, posY,0), (Quaternion)default );
+            var obj = PhotonManager.Instance.Instantiate("Photon_Cube", new Vector3(posX, posY, 0),
+                (Quaternion) default);
         }
     }
 }
 
 //
-
-
-
