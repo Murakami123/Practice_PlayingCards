@@ -4,12 +4,15 @@ using UnityEngine;
 
 public class DeckController : MonoBehaviour
 {
-    [SerializeField] private Card cardPrefab;
-
     private List<Card> cardList = new List<Card>();
     private readonly float cardThickness = 0.65f;
+    private readonly string cardPrefabName = "CardPrefab";
+    [SerializeField] private Transform cardPrefabParent;
+
     public void ResetDeck(int useJokerCount)
     {
+        Debug.Log("DeckController.ResetDeck");
+
         // 全カードリセット
         var sootAndNoList = DefaltSootAndNoList(useJokerCount);
         var shuffledCardList = CardShuffle(sootAndNoList); // シャッフル
@@ -18,11 +21,13 @@ public class DeckController : MonoBehaviour
         // カード生成
         cardList.Clear();
         Debug.Log("shuffledCardList.Count:" + shuffledCardList.Count);
-        
+
         for (int i = 0; i < shuffledCardList.Count; i++)
         {
-            var card = Instantiate(cardPrefab, cardPrefab.transform.parent);
-            card.Init(new Vector3(0f, instancePosY, 0f), shuffledCardList[i].Item1, shuffledCardList[i].Item2);
+            var cardObj = PhotonManager.Instance.Instantiate(cardPrefabName, new Vector3(0f, instancePosY, 0f),
+                (Quaternion) default);
+            var card = cardObj.GetComponent<Card>();
+            card.Init(parent:transform, shuffledCardList[i].Item1, shuffledCardList[i].Item2);
             cardList.Add(card);
             instancePosY += cardThickness;
         }
@@ -42,7 +47,8 @@ public class DeckController : MonoBehaviour
             card = cardList[cardList.Count - 1];
             cardList.RemoveAt(cardList.Count - 1);
         }
-        return  card;
+
+        return card;
     }
 
     public int GetDeckCardCount => cardList.Count;
@@ -53,11 +59,12 @@ public class DeckController : MonoBehaviour
     //      ・ 残りの枚数が0枚の状態で、タイミングになったらゲーム終了
     //      ☑ カードを引くことできる。
     //      ☑ 残り枚数がだいたいわかるぐらいの見た目。
-    
+
     // デフォルトの全スート、全カードのリスト
     private List<(CardSoot, int)> DefaltSootAndNoList(int jokerCount)
     {
-        var list =  new List<(CardSoot, int)>(){
+        var list = new List<(CardSoot, int)>()
+        {
             (CardSoot.Spade, 1),
             (CardSoot.Spade, 2),
             (CardSoot.Spade, 3),
@@ -122,15 +129,14 @@ public class DeckController : MonoBehaviour
 
     private List<(CardSoot, int)> CardShuffle(List<(CardSoot, int)> list)
     {
-        for (int i = 0; i < list.Count; i++) {
+        for (int i = 0; i < list.Count; i++)
+        {
             var temp = list[i];
             int randomIndex = Random.Range(0, list.Count);
             list[i] = list[randomIndex];
             list[randomIndex] = temp;
         }
-        return list;    
+
+        return list;
     }
-
 }
-
-

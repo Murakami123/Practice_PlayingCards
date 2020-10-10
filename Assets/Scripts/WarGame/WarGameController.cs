@@ -4,24 +4,41 @@ using System.Collections.Generic;
 using UnityEngine;
 using Cysharp.Threading.Tasks;
 using Cysharp.Threading.Tasks.Linq;
+using Photon.Realtime;
 
-public class WarGameController : MonoBehaviour
+public class WarGameController : BaseGameScene
 {
+    /////////////////////////////////////////////////////
+    /// 基本形
+    /////////////////////////////////////////////////////        
+    protected override string randomRoomName
+    {
+        get { return "randomRoom_War"; }
+    }
+
+    private async UniTask Start() => MainFlow().Forget();
+
+    /////////////////////////////////////////////////////
+    /// シーンのごとの処理
+    /////////////////////////////////////////////////////
     [SerializeField] private DeckController deckController;
+
     [SerializeField] private PlayerController[] playerController = new PlayerController[2]; // 2人対戦
     [SerializeField] private RectTransform HikiwakeCardPatent;
     private PlayerController player1 => playerController[0];
     private PlayerController player2 => playerController[1];
     private int useJokerCount = 2; // 1にしたいけど奇数だと最後1枚余る
 
-    private void Start()
-    {
-        MainFlow().Forget();
-    }
 
-    private async UniTask MainFlow()
+    protected async UniTask MainFlow()
     {
+        // 部屋がなければ作って入る
+        Debug.Log("WarGameController.Start_1");
+        await base.JoinOrCreateRoom();
+        Debug.Log("WarGameController.Start_2");
+
         // 山札リセット
+        Debug.Log("WarGameController.MainFlow");
         deckController.ResetDeck(useJokerCount);
 
         // 山札なくなるまで対戦繰り返し

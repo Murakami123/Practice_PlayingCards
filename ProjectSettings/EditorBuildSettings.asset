@@ -9,9 +9,9 @@ EditorBuildSettings:
     path: Assets/Scenes/TitleScene.unity
     guid: 66f49bb7819f7724bba56a3a4292a9fb
   - enabled: 1
-    path: Assets/Scenes/AlgoGameScene.unity
-    guid: 26ed9138b9e7b404b952decac270c346
-  - enabled: 1
     path: Assets/Scenes/WarGameScene.unity
     guid: 2cda990e2423bbf4892e6590ba056729
+  - enabled: 1
+    path: Assets/Scenes/AlgoGameScene.unity
+    guid: 26ed9138b9e7b404b952decac270c346
   m_configObjects: {}

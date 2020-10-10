@@ -6,16 +6,18 @@ using Photon.Pun;
 using Photon.Realtime;
 using Cysharp.Threading.Tasks;
 
-public class AlgoGameController : MonoBehaviour
+public class AlgoGameController : BaseGameScene
 {
-    private bool isOnLineMode => PhotonManager.Instance.isApplicationOnlineMode; // オンライン対戦かどうか
-    private readonly string randomRoomName = "randomRoom_Algo_";
+
+    protected override string randomRoomName
+    {
+        get { return "randomRoom_Algo"; }
+    }
     private async UniTask Start()
     {
+        // 部屋がなければ作って入る
         if (isOnLineMode)
-        {
             await PhotonManager.Instance.JoinOrCreateRoom(randomRoomName);
-        }
 
     }
     void OnGUI()

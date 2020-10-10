@@ -4,28 +4,27 @@ using UnityEngine;
 using UnityEngine.UI;
 using DG.Tweening;
 using Cysharp.Threading.Tasks;
+using Photon.Pun;
 using UnityEngine.Events;
 
-public abstract class Cardbase : MonoBehaviour
+public abstract class Cardbase : MonoBehaviour, IPunObservable
 {
     [SerializeField] Image cardImage;
     [SerializeField] Sprite backSpr;
     private Sprite frontSpr;
     private RectTransform _rect;
     private RectTransform rectTransform => (_rect) ? _rect : _rect = GetComponent<RectTransform>();
-    public CardSoot soot { get; private set; }
-    public int cardNo { get; private set; }
-    public bool isShowFront { get; private set; }
     private  readonly Vector3 rotation90 = new Vector3(0f, 90f, 0f);
     
-    public virtual void  Init( Vector3 anchorPos, CardSoot soot, int cardNo, bool isShowFront = false)
+    public virtual void Init( Transform parent, CardSoot soot, int cardNo, bool isShowFront = false)
     {
+        transform.SetParent(parent, false);
         this.soot = soot;  
         this.cardNo = cardNo;
         this.isShowFront = isShowFront;
         this.frontSpr = ResourceManager.Instance.GetSprite(soot, cardNo);
-        rectTransform.anchoredPosition = anchorPos;
         gameObject.SetActive(true);
+        // position の調整は PhotonManager.Init 方で行ってください
     }
 
     public async UniTask MoveCard(Transform cardParent, Vector3 movePos, bool isLittleShit = false)
@@ -86,6 +85,32 @@ public abstract class Cardbase : MonoBehaviour
     }
 
     public void OnTap() => SetChoice(isChoice: true);
+    
+    /////////////////////////////////////////////////////////////////////
+    /// 同期したい内容
+    /////////////////////////////////////////////////////////////////////
+    public CardSoot soot { get; private set; }
+    public int cardNo { get; private set; }
+    public bool isShowFront { get; private set; }
+
+    void IPunObservable.OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
+    {
+        if (stream.IsWriting)
+        {
+            // 送信側。
+            // 同期したいデータを集めて SendNext() で送る。
+            stream.SendNext((int)soot);
+            stream.SendNext(cardNo);
+            stream.SendNext(isShowFront);
+        }
+        else
+        {
+            // 受信側。
+            soot = (CardSoot)stream.ReceiveNext();
+            cardNo = (int)stream.ReceiveNext();
+            isShowFront = (bool)stream.ReceiveNext();
+        }  
+    }
 }
 
 public enum CardSoot

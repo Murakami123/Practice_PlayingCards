@@ -562,8 +562,10 @@
         <e p="Scripts" t="Include">
           <e p="AlgoGame" t="Include">
             <e p="AlgoGameController.cs" t="Include" />
+            <e p="PhotonCube.cs" t="Include" />
           </e>
           <e p="PhotonPractice" t="Include">
+            <e p="BaseGameScene.cs" t="Include" />
             <e p="MonsterScript.cs" t="Include" />
             <e p="PhotonManager.cs" t="Include" />
             <e p="SimplePun.cs" t="Include" />
