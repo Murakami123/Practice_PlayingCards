@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
+using UnityEngine.UI;
 
 public abstract class BaseGameScene : MonoBehaviour
 {
@@ -25,5 +26,6 @@ public abstract class BaseGameScene : MonoBehaviour
         GUILayout.Label(PhotonManager.Instance.GetNetworkClientState().ToString());
     }
 
-    // protected abstract async UniTask MainFlow();
+    // 1Pだけ実行するメソッド（山札の生成とか）
+    protected abstract UniTask MasterPlayerFlow();
 }

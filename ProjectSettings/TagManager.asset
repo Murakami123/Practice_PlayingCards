@@ -5,6 +5,7 @@ TagManager:
   serializedVersion: 2
   tags:
   - PlayerParent
+  - Photon_Player
   layers:
   - Default
   - TransparentFX

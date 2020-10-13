@@ -15,7 +15,13 @@ public class AlgoGameController : BaseGameScene
 
     protected override int gamePlayerCount => 2;
     private async UniTask Start() => MainFlow().Forget();
+    protected override async UniTask MasterPlayerFlow()
+    {
+        // マスター以外処理不要
+        if (!PhotonNetwork.IsMasterClient) return;
 
+    }
+    
     /////////////////////////////////////////////////////
     /// シーンのごとの処理
     /////////////////////////////////////////////////////

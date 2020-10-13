@@ -87,7 +87,7 @@ public class PhotonManager : MonoBehaviourPunCallbacks
     /// 各種メソッド
     /////////////////////////////////////////////////////
     // Photon 的な生成（世界に生成）
-    public GameObject Instantiate(string prefabName, Vector3 position, Quaternion rotation, byte group = 0,
+    public GameObject Instantiate(string prefabName, Vector3 position, Quaternion rotation = default, byte group = 0,
         object[] data = null)
     {
         // =>
@@ -113,11 +113,17 @@ public class PhotonManager : MonoBehaviourPunCallbacks
     }
 
     // タグ名の obj の子にする
-    public static void SetAnchoredPos(RectTransform rect, Vector3 anchoredPos, string parentTagName)
+    public static void SetAnchoredPos(RectTransform rect, Vector3 anchoredPos)
     {
-        var parentObj = GameObject.FindWithTag(parentTagName);
-        rect.SetParent(parentObj.transform);
+        // var parentObj = GameObject.FindWithTag(parentTagName);
+        // rect.SetParent(parentObj.transform);
         rect.anchoredPosition = anchoredPos;
+    }
+
+    public static void SetAnchoredPos(RectTransform rect, Transform parent)
+    {
+        // var parentObj = GameObject.FindWithTag(parentTagName);
+        rect.SetParent(parent, false);
     }
 
     // GetRoomListは一定時間ごとに更新され、その更新のタイミングで実行する処理

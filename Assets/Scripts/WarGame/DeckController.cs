@@ -6,7 +6,7 @@ public class DeckController : MonoBehaviour
 {
     private List<Card> cardList = new List<Card>();
     private readonly float cardThickness = 0.65f;
-    private readonly string cardPrefabName = "CardPrefab";
+    private readonly string cardPrefabName = "PhotonPrefab_Card";
     [SerializeField] private Transform cardPrefabParent;
 
     public void ResetDeck(int useJokerCount)
