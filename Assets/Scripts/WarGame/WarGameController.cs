@@ -19,37 +19,24 @@ public class WarGameController : BaseGameScene
     private readonly Vector3 anchoredPos_Player2 = new Vector3(0f, 250f, 0f);
     [SerializeField] private Transform deckParent;
     private async UniTask Start() => MainFlow().Forget();
-    protected override async UniTask MasterPlayerFlow()
-    {
-        // マスター以外処理不要
-        if (!PhotonNetwork.IsMasterClient) return;
-
-        // 山札生成
-        var deckObj = PhotonManager.Instance.Instantiate(deckPrefabName, deckAnchoredPos);
-        deckObj.transform.SetParent(deckParent, false);
-        deckController = deckObj.GetComponent<DeckController>();
-        deckController.ResetDeck(useJokerCount);
-    }
 
     /////////////////////////////////////////////////////
     /// シーンのごとの処理
     /////////////////////////////////////////////////////
-    [SerializeField] private PlayerController[] playerController = new PlayerController[2]; // 2人対戦
-
     [SerializeField] private RectTransform HikiwakeCardPatent;
+
+    [SerializeField] private Transform playerParent;
     private DeckController deckController;
     private readonly string deckPrefabName = "PhotonPrefab_Deck";
-    private readonly string playerParentTag = "PlayerParent";
-    private readonly string playerTag = "Photon_Player";
     private readonly string playerPrefabName = "PhotonPrefab_Player";
     private readonly Vector3 deckAnchoredPos = new Vector3(491f, 50f);
     private PlayerController player1;
-
     private PlayerController player2;
+    private int useJokerCount = 2; // 1にしたいけど奇数だと最後1枚余る
 
+    // private PlayerController[] playerController = new PlayerController[2]; // 2人対戦
     // private PlayerController player1 => playerController[0];
     // private PlayerController player2 => playerController[1];
-    private int useJokerCount = 2; // 1にしたいけど奇数だと最後1枚余る
 
     protected async UniTask MainFlow()
     {
@@ -69,33 +56,52 @@ public class WarGameController : BaseGameScene
         foreach (var player in currentRoom.Players)
             Debug.Log("player.Key:" + player.Key + ", player.Value:" + player.Value);
 
-        // 自分の PlayerPrefab を作り、部屋に共有。
-        var playerObj = PhotonManager.Instance.Instantiate(playerPrefabName, Vector3.zero, (Quaternion) default);
-        var playerRect = playerObj.GetComponent<RectTransform>();
-        PhotonManager.SetAnchoredPos(playerRect, anchoredPos_Player1);
-
-        // (人数分の PlayerController 生成待ち)        
-        await UniTask.WaitUntil(() => GameObject.FindGameObjectsWithTag(playerTag).Length >= 2); // マイフレーム確認しないで、0.2秒ぐらい待っても良い
-        
-        // 各種世界で生成された Player の GetComponent 
-        var playerObjs = GameObject.FindGameObjectsWithTag(playerTag);
-        Debug.Log(" playerObjs.Length:" + playerObjs.Length, this);
-        player1 = playerObjs[0].GetComponent<PlayerController>();     
-        player1.transform.SetParent(GameObject.FindWithTag(playerParentTag).transform, false);
-        player2 = playerObjs[1].GetComponent<PlayerController>();     
-        player2.transform.SetParent(GameObject.FindWithTag(playerParentTag).transform, false);
-        
-        // for (int i = 0; i < playerObjs.Length; i++)
-        // {
-        //     var target = (i == 0) ? player1 : player2;
-        //     target = playerObjs[i].GetComponent<PlayerController>();
-        //
-        //     // SetParent は世界共通でできないので、自分の世界の 全ての obj で SetParent。
-        //     target.transform.SetParent(GameObject.FindWithTag(playerParentTag).transform, false);
-        // }
-
         // 1Pだけの処理
-        await MasterPlayerFlow(); // 山札リセット
+        await MasterPlayerFlow();
+
+        // // 勝敗引き分けチェック
+        // if (player1.winGetCardList.Count == player2.winGetCardList.Count)
+        // {
+        //     // 引き分け
+        //     GameEnd_Hikiwake();
+        // }
+        // else
+        // {
+        //     var isPlayer1win = (player1.winGetCardList.Count > player2.winGetCardList.Count);
+        //     if (isPlayer1win)
+        //         GameEnd_Player1Win();
+        //     else
+        //         GameEnd_Player2Win();
+        // }
+    }
+
+    protected override async UniTask MasterPlayerFlow()
+    {
+        // マスター以外処理不要
+        if (!PhotonNetwork.IsMasterClient) return;
+
+        // 全員分の PlayerPrefab を作り、部屋に共有。
+        {
+            var player_1_Obj = PhotonManager.Instance.Instantiate(playerPrefabName, Vector3.zero, (Quaternion) default);
+            var player_1_Rect = player_1_Obj.GetComponent<RectTransform>();
+            player1 = player_1_Obj.GetComponent<PlayerController>();
+            player1.name += "_Player1";
+            PhotonManager.Instance.SetParent(player1.transform, playerParent);
+            player_1_Rect.anchoredPosition = anchoredPos_Player1;
+
+            var player_2_Obj = PhotonManager.Instance.Instantiate(playerPrefabName, Vector3.zero, (Quaternion) default);
+            var player_2_Rect = player_2_Obj.GetComponent<RectTransform>();
+            player2 = player_2_Obj.GetComponent<PlayerController>();
+            player1.name += "_Player2";
+            PhotonManager.Instance.SetParent(player2.transform, playerParent);
+            player_2_Rect.anchoredPosition = anchoredPos_Player2;
+        }
+
+        // 山札生成
+        var deckObj = PhotonManager.Instance.Instantiate(deckPrefabName, deckAnchoredPos);
+        PhotonManager.Instance.SetParent(deckObj.transform, deckParent);
+        deckController = deckObj.GetComponent<DeckController>();
+        deckController.ResetDeck(useJokerCount);
 
         // 山札なくなるまで対戦繰り返し
         Debug.Log("deckController.GetDeckCardCount:" + deckController.GetDeckCardCount);
@@ -151,23 +157,7 @@ public class WarGameController : BaseGameScene
                 );
             }
         }
-
-        // 勝敗引き分けチェック
-        if (player1.winGetCardList.Count == player2.winGetCardList.Count)
-        {
-            // 引き分け
-            GameEnd_Hikiwake();
-        }
-        else
-        {
-            var isPlayer1win = (player1.winGetCardList.Count > player2.winGetCardList.Count);
-            if (isPlayer1win)
-                GameEnd_Player1Win();
-            else
-                GameEnd_Player2Win();
-        }
     }
-
 
     private async UniTask DistributeCard(PlayerController player)
     {
@@ -177,9 +167,9 @@ public class WarGameController : BaseGameScene
         player.AddCard(drawCard);
     }
 
-    /////////////////////////////////////////////////////
+    /////////////////////////////////////////////////////////////////////////////////////////
     // 勝敗表示
-    /////////////////////////////////////////////////////    
+    /////////////////////////////////////////////////////////////////////////////////////////
     [SerializeField] private GameObject player1WinObj, player2WinObj, gameHikiwakeObj;
 
     private void GameEnd_Player1Win()

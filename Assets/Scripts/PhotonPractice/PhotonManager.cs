@@ -6,10 +6,11 @@ using Photon.Realtime;
 using Cysharp.Threading.Tasks;
 using UnityEngine.UI;
 using System.Linq;
+using System.Runtime.CompilerServices;
 
-
-// public class PhotonManager : MonoBehaviourPunCallbacks
-public class PhotonManager : MonoBehaviourPunCallbacks
+public class PhotonManager :
+    MonoBehaviourPunCallbacks, // ロビー、ルームに入退室のコールバックを呼べる。
+    IPunObservable // [PunRPC] でメソッドを実行するために必要
 {
     public static PhotonManager Instance { get; private set; }
 
@@ -46,15 +47,6 @@ public class PhotonManager : MonoBehaviourPunCallbacks
     /// ロビー、ルーム関連
     /////////////////////////////////////////////////////
 
-    // // ロビーに入る機能。
-    // public async UniTask JoinLobby()
-    // {
-    //     Debug.Log("ロビーに入る");
-    //     PhotonNetwork.JoinLobby();
-    //     await UniTask.WaitUntil(() => GetNetworkClientState() == ClientState.JoinedLobby); // ルーム入室待ち
-    //     Debug.Log("ロビーに入った");
-    // }
-
     /// 部屋入出
     public async UniTask JoinOrCreateRoom(string roomName)
     {
@@ -67,14 +59,11 @@ public class PhotonManager : MonoBehaviourPunCallbacks
 
         // ◆ ルーム入室待ち_B案
         await UniTask.WaitUntil(() => GetNetworkClientState() == ClientState.Joined); // ルーム入室待ち
-
         Debug.Log("部屋入るの待ち_終わり");
     }
 
     private void OnJoinedRoom()
     {
-        // Debug.Log("部屋入った！");
-        // isWaitingRoomJoin = false;
     }
 
     // クライアントの現在の情報を返す
@@ -112,31 +101,88 @@ public class PhotonManager : MonoBehaviourPunCallbacks
         Debug.Log("人数揃った");
     }
 
-    // タグ名の obj の子にする
-    public static void SetAnchoredPos(RectTransform rect, Vector3 anchoredPos)
-    {
-        // var parentObj = GameObject.FindWithTag(parentTagName);
-        // rect.SetParent(parentObj.transform);
-        rect.anchoredPosition = anchoredPos;
-    }
-
-    public static void SetAnchoredPos(RectTransform rect, Transform parent)
-    {
-        // var parentObj = GameObject.FindWithTag(parentTagName);
-        rect.SetParent(parent, false);
-    }
-
     // GetRoomListは一定時間ごとに更新され、その更新のタイミングで実行する処理
     // ルームリストに更新があった時
     private List<RoomInfo> roomInfoList = new List<RoomInfo>(); // 最新のルーム一覧情報
+
     public override void OnRoomListUpdate(List<RoomInfo> roomList)
-    { 
+    {
         Debug.Log("ルーム情報更新。ルーム数:" + roomList.Count);
         // =>
         roomInfoList = roomList;
-    }   
+    }
+
+    /////////////////////////////////////////////////////////////////////////////////////////
+    // PUN メソッド（Pun メソッドを呼ぶインスタンスが、その Pun メソッドを持っていけない気がした）
+    /////////////////////////////////////////////////////////////////////////////////////////
+    public void SetParent(Transform child, Transform parent)
+    {
+        PhotonView photonView = PhotonView.Get(this);
+        var childTag = child.gameObject.tag;
+        var parentTag = parent.gameObject.tag;
+        photonView.RPC("SetParentStr", RpcTarget.All, child.name, childTag, parent.name, parentTag);
+    }
+
+    // string だけで SetParent する天才的なメソッド
+    [PunRPC]
+    public void SetParentStr(string childName, string childTag, string parentName, string parentTag)
+    {
+        var child = GetTransform(childName, childTag);
+        var parent = GetTransform(parentName, parentTag);
+        Transform GetTransform(string objName, string tagName)
+        {
+            if (tagName == "Untagged") Debug.Log("tag が設定されていません。objName:" + objName);
+            var tagObjs = GameObject.FindGameObjectsWithTag(tagName);
+            var objs = tagObjs.Where(obj => obj.name == objName);
+            if (objs.Count() > 1) Debug.LogError("同じタグの同名 obj が複数あります。NW上で唯一の名前にしてください:" + objs.First());
+            if (!objs.Any()) Debug.LogError("見つからない。objName:" + objName + ", tagName:" + tagName);
+            return objs.First().transform;
+        }
+        child.SetParent(parent, false);
+    }
+
+    /////////////////////////////////////////////////////////////////////////////////////////
+    // 別世界の PhotonManager と同期する内容
+    /////////////////////////////////////////////////////////////////////////////////////////
+    void IPunObservable.OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
+    {
+    }
 }
 
+/////////////////////////////////////////////////////////////////////
+/// 通常のメソッドと Photonのメソッド の違いを吸収する拡張メソッド。
+// /////////////////////////////////////////////////////////////////////
+// public static class PhotonExtension
+// {
+//     public static void PhotonSetParent(this Transform trans, Transform parent)
+//     {
+//         PhotonView photonView = PhotonView.Get(trans);
+//         if (photonView == null) Debug.LogError("trans に PhotonView がついてない");
+//
+//         var childTag = trans.gameObject.tag;
+//         var parentTag = parent.gameObject.tag;
+//
+//         photonView.RPC("SetParentStr", RpcTarget.All, trans.name, childTag, parent.name, parentTag);
+//     }
+//
+//     // string だけで SetParent する天才的なメソッド
+//     public static void SetParent(string childName, string childTag, string parentName, string parentTag)
+//     {
+//         var childTags = GameObject.FindGameObjectsWithTag(childTag);
+//         var childNames = childTags.Where(obj => obj.name == childName);
+//         if (childNames.Count() > 1) Debug.LogError("同じタグの同名 obj が複数あります。NW上で唯一の名前にしてください");
+//         var child = childNames.First();
+//
+//         var parentTags = GameObject.FindGameObjectsWithTag(parentTag);
+//         var parentNames = parentTags.Where(obj => obj.name == parentName);
+//         if (parentNames.Count() > 1) Debug.LogError("同じタグの同名 obj が複数あります。NW上で唯一の名前にしてください");
+//         var parent = parentNames.First();
+//
+//         child.transform.SetParent(parent.transform, false);
+//     }
+// }
+
+// Photon カスタムプロパティ
 public class PhotonProperty : MonoBehaviour
 {
     // ルームプロパティ用のハッシュ(Dictionary)

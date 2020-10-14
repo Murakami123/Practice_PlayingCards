@@ -12,17 +12,13 @@
   <component name="ChangeListManager">
     <list default="true" id="b478a8ed-63ea-428f-a59f-daed2dc2b478" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Practice_PlayingCards2/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Practice_PlayingCards2/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Photon/Resources/CardPrefab.prefab" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Photon/Resources/CardPrefab.prefab.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Photon/Resources/Photon_Cube.prefab" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Photon/Resources/Photon_Cube.prefab.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Photon/Resources/PlayerPrefab.prefab" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Photon/Resources/PlayerPrefab.prefab.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Photon/PhotonUnityNetworking/Resources/PhotonServerSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Photon/PhotonUnityNetworking/Resources/PhotonServerSettings.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Photon/Resources/PhotonPrefab_Deck.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Photon/Resources/PhotonPrefab_Deck.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefab/DontDestroyOnLoad.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefab/DontDestroyOnLoad.prefab" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scenes/WarGameScene.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/WarGameScene.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/AlgoGame/AlgoGameController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/AlgoGame/AlgoGameController.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/PhotonPractice/BaseGameScene.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/PhotonPractice/BaseGameScene.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/PhotonPractice/PhotonManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/PhotonPractice/PhotonManager.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/WarGame/DeckController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/WarGame/DeckController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/WarGame/PlayerController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/WarGame/PlayerController.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/WarGame/WarGameController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/WarGame/WarGameController.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ProjectSettings/TagManager.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/TagManager.asset" afterDir="false" />
     </list>
@@ -42,7 +38,6 @@
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/PhotonPractice/BaseGameScene.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/PhotonPractice/SimplePun.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/TitleScene/TitleSceneController.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="mock:///Dummy.cs" root0="SKIP_HIGHLIGHTING" />
   </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
@@ -64,12 +59,12 @@
         <option value="$PROJECT_DIR$/Assets/Scripts/WarGame/Card.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/WarGame/Cardbase.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/PhotonPractice/PhotonGameScene.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/WarGame/PlayerController.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/PhotonPractice/BaseGameScene.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/WarGame/DeckController.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/AlgoGame/AlgoGameController.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/PhotonPractice/PhotonManager.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/PhotonPractice/BaseGameScene.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/WarGame/PlayerController.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/WarGame/WarGameController.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/PhotonPractice/PhotonManager.cs" />
       </list>
     </option>
   </component>
@@ -132,7 +127,8 @@
       <workItem from="1601503057728" duration="138000" />
       <workItem from="1601503231050" duration="84000" />
       <workItem from="1601511186752" duration="31006000" />
-      <workItem from="1602326965039" duration="32292000" />
+      <workItem from="1602326965039" duration="33589000" />
+      <workItem from="1602611227134" duration="14948000" />
     </task>
     <servers />
   </component>
@@ -179,9 +175,9 @@
       <screen x="0" y="0" width="1920" height="1160" />
     </state>
     <state width="600" height="428" key="javadoc.popup/-1920.0.1920.1160/0.0.1920.1160@0.0.1920.1160" timestamp="1602355940932" />
-    <state x="623" y="255" width="672" height="678" key="search.everywhere.popup" timestamp="1602440849631">
+    <state x="623" y="255" width="672" height="160" key="search.everywhere.popup" timestamp="1602617571740">
       <screen x="0" y="0" width="1920" height="1160" />
     </state>
-    <state x="623" y="255" width="672" height="678" key="search.everywhere.popup/-1920.0.1920.1160/0.0.1920.1160@0.0.1920.1160" timestamp="1602440849631" />
+    <state x="623" y="255" width="672" height="160" key="search.everywhere.popup/-1920.0.1920.1160/0.0.1920.1160@0.0.1920.1160" timestamp="1602617571740" />
   </component>
 </project>
