@@ -112,9 +112,46 @@ public class PhotonManager :
         roomInfoList = roomList;
     }
 
-    /////////////////////////////////////////////////////////////////////////////////////////
-    // PUN メソッド（Pun メソッドを呼ぶインスタンスが、その Pun メソッドを持っていけない気がした）
-    /////////////////////////////////////////////////////////////////////////////////////////
+    //////////////////////////////////////////////////////////////
+    // IPunObservable の汎用メソッド
+    //////////////////////////////////////////////////////////////
+    public void ChangeObjName(PhotonStream stream, GameObject obj)
+    {
+        if (stream.IsWriting)
+        {
+            var objName = obj.name;
+            stream.SendNext(objName);
+        }
+        else
+        {
+            obj.name = (string) stream.ReceiveNext();
+        }
+    }
+
+    //////////////////////////////////////////////////////////////
+    // PUN メソッド
+    //////////////////////////////////////////////////////////////
+
+    public void SetParent(PhotonView photonView, Transform parent)
+    {
+        var viewIdStr = photonView.ViewID.ToString();
+        var childTag = photonView.gameObject.tag;
+        var parentName = parent.gameObject.name;
+        var parentTag = parent.gameObject.tag;
+        Debug.Log("viewIdStr:" + viewIdStr);
+        PhotonView.Get(this).RPC("SetParentPhoton", RpcTarget.All, viewIdStr, childTag, parentName, parentTag);
+    }
+
+    [PunRPC]
+    public void SetParentPhoton(string photonViewId, string childTag, string parentName, string parentTag)
+    {
+        Debug.Log("photonViewId:" + photonViewId);
+        Debug.Log("int.Parse(photonViewId):" + int.Parse(photonViewId));
+        var child = GetTransform(int.Parse(photonViewId), childTag);
+        var parent = GetTransform(parentName, parentTag);
+        child.SetParent(parent, false);
+    }
+
     public void SetParent(Transform child, Transform parent)
     {
         PhotonView photonView = PhotonView.Get(this);
@@ -123,24 +160,40 @@ public class PhotonManager :
         photonView.RPC("SetParentStr", RpcTarget.All, child.name, childTag, parent.name, parentTag);
     }
 
-    // string だけで SetParent する天才的なメソッド
     [PunRPC]
     public void SetParentStr(string childName, string childTag, string parentName, string parentTag)
     {
         var child = GetTransform(childName, childTag);
         var parent = GetTransform(parentName, parentTag);
-        Transform GetTransform(string objName, string tagName)
-        {
-            if (tagName == "Untagged") Debug.Log("tag が設定されていません。objName:" + objName);
-            var tagObjs = GameObject.FindGameObjectsWithTag(tagName);
-            var objs = tagObjs.Where(obj => obj.name == objName);
-            if (objs.Count() > 1) Debug.LogError("同じタグの同名 obj が複数あります。NW上で唯一の名前にしてください:" + objs.First());
-            if (!objs.Any()) Debug.LogError("見つからない。objName:" + objName + ", tagName:" + tagName);
-            return objs.First().transform;
-        }
         child.SetParent(parent, false);
     }
 
+    private Transform GetTransform(int viewId, string tagName)
+    {
+        if (tagName == "Untagged") Debug.LogError("tag が設定されていません。objName:" + tagName);
+        GameObject obj = null;
+        var tagObjs = GameObject.FindGameObjectsWithTag(tagName);
+        for (int i = 0; i < tagObjs.Length; i++)
+        {
+            var view = tagObjs[i].GetComponent<PhotonView>();
+            if ((view != null) && (view.ViewID == viewId))
+                obj = tagObjs[i];
+        }
+        
+        if (obj == null) Debug.LogError("見つからない。viewId:" + viewId + ", tagName:" + tagName);
+        return obj.transform;
+    }
+
+    private Transform GetTransform(string objName, string tagName)
+    {
+        if (tagName == "Untagged") Debug.Log("tag が設定されていません。objName:" + objName);
+        var tagObjs = GameObject.FindGameObjectsWithTag(tagName);
+        var objs = tagObjs.Where(obj => obj.name == objName);
+        if (objs.Count() > 1) Debug.LogError("同じタグの同名 obj が複数あります。NW上で唯一の名前にしてください:" + objs.First());
+        if (!objs.Any()) Debug.LogError("見つからない。objName:" + objName + ", tagName:" + tagName);
+        return objs.First().transform;
+    }
+    
     /////////////////////////////////////////////////////////////////////////////////////////
     // 別世界の PhotonManager と同期する内容
     /////////////////////////////////////////////////////////////////////////////////////////

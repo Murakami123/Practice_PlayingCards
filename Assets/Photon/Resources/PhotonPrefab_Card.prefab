@@ -182,8 +182,8 @@ GameObject:
   - component: {fileID: 4075704948262746962}
   - component: {fileID: 4357530225708779788}
   m_Layer: 5
-  m_Name: CardPrefab
-  m_TagString: Untagged
+  m_Name: PhotonPrefab_Card
+  m_TagString: Photon_Card
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -296,7 +296,9 @@ MonoBehaviour:
   observableSearch: 2
   Synchronization: 3
   OwnershipTransfer: 0
-  ObservedComponents: []
+  ObservedComponents:
+  - {fileID: 3690005913518926335}
+  - {fileID: 4357530225708779788}
   viewIdField: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0

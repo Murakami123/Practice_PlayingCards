@@ -16,9 +16,8 @@ public abstract class Cardbase : MonoBehaviour, IPunObservable
     private RectTransform rectTransform => (_rect) ? _rect : _rect = GetComponent<RectTransform>();
     private  readonly Vector3 rotation90 = new Vector3(0f, 90f, 0f);
     
-    public virtual void Init( Transform parent, CardSoot soot, int cardNo, bool isShowFront = false)
+    public virtual void Init(CardSoot soot, int cardNo, bool isShowFront = false)
     {
-        transform.SetParent(parent, false);
         this.soot = soot;  
         this.cardNo = cardNo;
         this.isShowFront = isShowFront;

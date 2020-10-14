@@ -6,6 +6,10 @@ TagManager:
   tags:
   - PlaerParent
   - DeckParent
+  - PlayerParent
+  - Photon_Deck
+  - Photon_Player
+  - Photon_Card
   layers:
   - Default
   - TransparentFX

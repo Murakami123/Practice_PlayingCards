@@ -71,23 +71,20 @@ public class PlayerController : MonoBehaviour, IPunObservable
     }
 
     /////////////////////////////////////////////////////////////////////
+    /// Photon
+    /////////////////////////////////////////////////////////////////////
+    private PhotonView photonView;
+    public PhotonView GetPhotonView()
+    {
+        if (photonView == null) photonView = GetComponent<PhotonView>();
+        return photonView;
+    }
+
+    /////////////////////////////////////////////////////////////////////
     /// 同期したい内容
     /////////////////////////////////////////////////////////////////////
     void IPunObservable.OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
     {
-        if (stream.IsWriting)
-        {
-        }
-        else
-        {
-        }
+        PhotonManager.Instance.ChangeObjName(stream, gameObject);
     }
-    
-    // /////////////////////////////////////////////////////////////////////////////////////////
-    // // PUN メソッド（Pun メソッドを呼ぶインスタンスが、その Pun メソッドを持っていけない気がした）
-    // /////////////////////////////////////////////////////////////////////////////////////////
-    // // string だけで SetParent する天才的なメソッド
-    // [PunRPC]
-    // public void SetParentStr(string cn, string ct, string pn, string pt) => PhotonExtension.SetParent(cn, ct, pn, pt);      
-    
 }

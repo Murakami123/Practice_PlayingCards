@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using Photon.Pun;
 using UnityEngine;
 
 public class DeckController : MonoBehaviour
@@ -24,10 +25,11 @@ public class DeckController : MonoBehaviour
 
         for (int i = 0; i < shuffledCardList.Count; i++)
         {
-            var cardObj = PhotonManager.Instance.Instantiate(cardPrefabName, new Vector3(0f, instancePosY, 0f),
-                (Quaternion) default);
+            var cardObj = PhotonManager.Instance.Instantiate(cardPrefabName, new Vector3(0f, instancePosY, 0f));
             var card = cardObj.GetComponent<Card>();
-            card.Init(parent:transform, shuffledCardList[i].Item1, shuffledCardList[i].Item2);
+            var photonView = cardObj.GetComponent<PhotonView>();
+            card.Init(shuffledCardList[i].Item1, shuffledCardList[i].Item2);
+            PhotonManager.Instance.SetParent(photonView, transform);
             cardList.Add(card);
             instancePosY += cardThickness;
         }

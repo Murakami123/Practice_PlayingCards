@@ -40,6 +40,9 @@ public class WarGameController : BaseGameScene
 
     protected async UniTask MainFlow()
     {
+        Debug.Log("photonViewId:" + "1002");
+        Debug.Log("int.Parse(1002):" + int.Parse("1002"));
+        
         // 部屋がなければ作って入る
         Debug.Log("WarGameController.Start_1");
         await base.JoinOrCreateRoom();
@@ -85,15 +88,17 @@ public class WarGameController : BaseGameScene
             var player_1_Obj = PhotonManager.Instance.Instantiate(playerPrefabName, Vector3.zero, (Quaternion) default);
             var player_1_Rect = player_1_Obj.GetComponent<RectTransform>();
             player1 = player_1_Obj.GetComponent<PlayerController>();
-            player1.name += "_Player1";
-            PhotonManager.Instance.SetParent(player1.transform, playerParent);
+            // player1.name += "_Player1";
+            // PhotonManager.Instance.SetParent(player1.transform, playerParent);
+            PhotonManager.Instance.SetParent(player1.GetPhotonView(), playerParent);
             player_1_Rect.anchoredPosition = anchoredPos_Player1;
 
             var player_2_Obj = PhotonManager.Instance.Instantiate(playerPrefabName, Vector3.zero, (Quaternion) default);
             var player_2_Rect = player_2_Obj.GetComponent<RectTransform>();
             player2 = player_2_Obj.GetComponent<PlayerController>();
-            player2.name += "_Player2";
-            PhotonManager.Instance.SetParent(player2.transform, playerParent);
+            // player2.name += "_Player2";
+            // PhotonManager.Instance.SetParent(player2.transform, playerParent);
+            PhotonManager.Instance.SetParent(player2.GetPhotonView(), playerParent);
             player_2_Rect.anchoredPosition = anchoredPos_Player2;
         }
 

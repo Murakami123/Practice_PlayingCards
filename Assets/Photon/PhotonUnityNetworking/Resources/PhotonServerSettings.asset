@@ -40,6 +40,7 @@ MonoBehaviour:
   - RespawnSpaceship
   - SetParent
   - SetParentStr
+  - SetParentPhoton
   DisableAutoOpenWizard: 1
   ShowSettings: 0
   DevRegionSetOnce: 1
