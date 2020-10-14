@@ -92,7 +92,7 @@ public class WarGameController : BaseGameScene
             var player_2_Obj = PhotonManager.Instance.Instantiate(playerPrefabName, Vector3.zero, (Quaternion) default);
             var player_2_Rect = player_2_Obj.GetComponent<RectTransform>();
             player2 = player_2_Obj.GetComponent<PlayerController>();
-            player1.name += "_Player2";
+            player2.name += "_Player2";
             PhotonManager.Instance.SetParent(player2.transform, playerParent);
             player_2_Rect.anchoredPosition = anchoredPos_Player2;
         }
