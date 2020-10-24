@@ -26,7 +26,7 @@ public class PlayerController : PhotonMonobehaviour
             var card = cardList[i];
             if (card != null)
             {
-                card.SetParent(cardPosParent);
+                card.SetParent(cardPosParentPV);
                 card.MoveCard(cardPosParent.localPosition).Forget();
             }
         }
