@@ -2,7 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="58d041aa-5856-48f0-8b5a-3a58c7d7893d" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/Assets/Photon/PhotonUnityNetworking/Icons.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.Practice_PlayingCards_001/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Practice_PlayingCards_001/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Photon/Resources/PhotonPrefab_Player.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Photon/Resources/PhotonPrefab_Player.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/WarGame/PlayerController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/WarGame/PlayerController.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -11,6 +13,13 @@
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="IdeDocumentHistory">
+    <option name="CHANGED_PATHS">
+      <list>
+        <option value="$PROJECT_DIR$/Assets/Scripts/WarGame/PlayerController.cs" />
+      </list>
+    </option>
   </component>
   <component name="ProjectId" id="1jL8bCMYuwEkw1KRpdH6uOY2MO2" />
   <component name="ProjectViewState">
@@ -51,7 +60,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1603572086745</updated>
-      <workItem from="1603572099462" duration="323000" />
+      <workItem from="1603572099462" duration="995000" />
     </task>
     <servers />
   </component>

@@ -69,7 +69,8 @@ public class PlayerController : PhotonMonobehaviour
     {
         Debug.Log("勝者カード移動。winGetCard:" + winGetCard, this);
         winGetCard.SetParent(winGetCardParentPV);
-        winGetCard.MoveCard(winGetCardParent.localPosition, isLittleShit: true);
+        // winGetCard.MoveCard(winGetCardParent.localPosition, isLittleShit: true);
+        winGetCard.MoveCard(Vector3.zero, isLittleShit: true);
         winGetCardList.Add(winGetCard);
     }
 
