@@ -27,13 +27,9 @@ public class DeckController : PhotonMonobehaviour
         {
             var cardObj = PhotonManager.Instance.Instantiate(cardPrefabName, new Vector3(0f, instancePosY, 0f));
             var card = cardObj.GetComponent<Card>();
-            var photonView = cardObj.GetComponent<PhotonView>();
             card.Init(shuffledCardList[i].Item1, shuffledCardList[i].Item2);
+            card.SetParent(ObjTag.Photon_Deck); // 親が PhotonView 持ってるのでこっち
 
-            card.SetParent(photonView); // 親が PhotonView 持ってるのでこっち
-            // card.SetParent(transform); 
-
-            // PhotonManager.Instance.SetParent(photonView, transform);
             cardList.Add(card);
             instancePosY += cardThickness;
         }

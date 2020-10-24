@@ -11,17 +11,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b478a8ed-63ea-428f-a59f-daed2dc2b478" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.Practice_PlayingCards2/.idea/contentModel.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Practice_PlayingCards2/.idea/contentModel.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Practice_PlayingCards2/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Practice_PlayingCards2/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Photon/PhotonUnityNetworking/Resources/PhotonServerSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Photon/PhotonUnityNetworking/Resources/PhotonServerSettings.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Photon/Resources/PhotonPrefab_Deck.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Photon/Resources/PhotonPrefab_Deck.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Photon/Resources/PhotonPrefab_Player.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Photon/Resources/PhotonPrefab_Player.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/PhotonPractice/PhotonManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/PhotonPractice/PhotonManager.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/WarGame/Cardbase.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/WarGame/Cardbase.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/WarGame/DeckController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/WarGame/DeckController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/WarGame/PlayerController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/WarGame/PlayerController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/WarGame/WarGameController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/WarGame/WarGameController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjectSettings/TagManager.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/TagManager.asset" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -63,11 +54,11 @@
         <option value="$PROJECT_DIR$/Assets/Scripts/AlgoGame/AlgoGameController.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/PhotonPractice/BaseGameScene.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/PhotonPractice/PhotonManager.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/WarGame/DeckController.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/PhotonPractice/PhotonMonobehaviour.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/WarGame/Cardbase.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/WarGame/PlayerController.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/WarGame/WarGameController.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/PhotonPractice/PhotonMonobehaviour.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/WarGame/DeckController.cs" />
       </list>
     </option>
   </component>
@@ -133,7 +124,7 @@
       <workItem from="1602326965039" duration="33589000" />
       <workItem from="1602611227134" duration="23323000" />
       <workItem from="1603513989162" duration="1857000" />
-      <workItem from="1603517073127" duration="15115000" />
+      <workItem from="1603517073127" duration="16226000" />
     </task>
     <servers />
   </component>
