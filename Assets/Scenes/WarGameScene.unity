@@ -210,7 +210,7 @@ GameObject:
   - component: {fileID: 330202640}
   m_Layer: 5
   m_Name: HikiwakeParent
-  m_TagString: Untagged
+  m_TagString: HikiwakeCardParent
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -274,7 +274,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   deckParent: {fileID: 948164831}
-  HikiwakeCardPatent: {fileID: 330202640}
+  HikiwakeCardParent: {fileID: 330202640}
   playerParent: {fileID: 1766889816}
   player1WinObj: {fileID: 1741904039}
   player2WinObj: {fileID: 1274977597}

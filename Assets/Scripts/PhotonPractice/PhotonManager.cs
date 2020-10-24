@@ -113,87 +113,89 @@ public class PhotonManager :
     }
 
     //////////////////////////////////////////////////////////////
-    // IPunObservable の汎用メソッド
-    //////////////////////////////////////////////////////////////
-    public void ChangeObjName(PhotonStream stream, GameObject obj)
-    {
-        if (stream.IsWriting)
-        {
-            var objName = obj.name;
-            stream.SendNext(objName);
-        }
-        else
-        {
-            obj.name = (string) stream.ReceiveNext();
-        }
-    }
-
-    //////////////////////////////////////////////////////////////
     // PUN メソッド
     //////////////////////////////////////////////////////////////
 
-    public void SetParent(PhotonView photonView, Transform parent)
-    {
-        var viewIdStr = photonView.ViewID.ToString();
-        var childTag = photonView.gameObject.tag;
-        var parentName = parent.gameObject.name;
-        var parentTag = parent.gameObject.tag;
-        Debug.Log("viewIdStr:" + viewIdStr);
-        PhotonView.Get(this).RPC("SetParentPhoton", RpcTarget.All, viewIdStr, childTag, parentName, parentTag);
-    }
+    private PhotonView _pv;
+    private PhotonView photonView => (_pv != null) ? _pv : _pv = PhotonView.Get(this);
 
-    [PunRPC]
-    public void SetParentPhoton(string photonViewId, string childTag, string parentName, string parentTag)
-    {
-        Debug.Log("photonViewId:" + photonViewId);
-        Debug.Log("int.Parse(photonViewId):" + int.Parse(photonViewId));
-        var child = GetTransform(int.Parse(photonViewId), childTag);
-        var parent = GetTransform(parentName, parentTag);
-        child.SetParent(parent, false);
-    }
+    // スクリプトから呼ぶ奴
+    // public void SetParent(PhotonView pv, Transform parent)
+    // {
+    //     var viewIdStr = pv.ViewID.ToString();
+    //     var childTag = pv.gameObject.tag;
+    //     var parentPath = GetHierarchyPath(parent.transform);
+    //     var parentTag = parent.gameObject.tag;
+    //     Debug.Log("viewIdStr:" + viewIdStr);
+    //     photonView.RPC(nameof(Photon_SetParent_WithId), RpcTarget.AllViaServer, viewIdStr, childTag, parentPath, parentTag);
+    // }
+    //
+    // // スクリプトから呼ぶ奴
+    // public void SetParent(Transform child, Transform parent)
+    // {
+    //     var childTag = child.gameObject.tag;
+    //     var parentPath = GetHierarchyPath(parent.transform);
+    //     var parentTag = parent.gameObject.tag;
+    //     photonView.RPC(nameof(Photon_SetParent_WithPath), RpcTarget.AllViaServer, child.name, childTag, parentPath, parentTag);
+    // }
+    //
+    // private Transform GetTransform(int viewId, string tagName)
+    // {
+    //     if (tagName == "Untagged") Debug.LogError("tag が設定されていません。objName:" + tagName);
+    //     GameObject obj = null;
+    //     var tagObjs = GameObject.FindGameObjectsWithTag(tagName);
+    //     for (int i = 0; i < tagObjs.Length; i++)
+    //     {
+    //         var view = tagObjs[i].GetComponent<PhotonView>();
+    //         if ((view != null) && (view.ViewID == viewId))
+    //             obj = tagObjs[i];
+    //     }
+    //
+    //     if (obj == null) Debug.LogError("見つからない。viewId:" + viewId + ", tagName:" + tagName);
+    //     return obj.transform;
+    // }
 
-    public void SetParent(Transform child, Transform parent)
-    {
-        PhotonView photonView = PhotonView.Get(this);
-        var childTag = child.gameObject.tag;
-        var parentTag = parent.gameObject.tag;
-        photonView.RPC("SetParentStr", RpcTarget.All, child.name, childTag, parent.name, parentTag);
-    }
+    // private Transform GetTransform(string objName, string tagName)
+    // {
+    //     if (tagName == "Untagged") Debug.Log("tag が設定されていません。objName:" + objName);
+    //     var tagObjs = GameObject.FindGameObjectsWithTag(tagName);
+    //     var objs = tagObjs.Where(obj => obj.name == objName);
+    //     if (objs.Count() > 1) Debug.LogError("同じタグの同名 obj が複数あります。NW上で唯一の名前にしてください:" + objs.First());
+    //     if (!objs.Any()) Debug.LogError("見つからない。objName:" + objName + ", tagName:" + tagName);
+    //     return objs.First().transform;
+    // }
 
-    [PunRPC]
-    public void SetParentStr(string childName, string childTag, string parentName, string parentTag)
-    {
-        var child = GetTransform(childName, childTag);
-        var parent = GetTransform(parentName, parentTag);
-        child.SetParent(parent, false);
-    }
+    // private Transform GetTransform(string objPath, string tagName)
+    // {
+    //     if (tagName == "Untagged") Debug.Log("tag が設定されていません。objPath:" + objPath);
+    //     var tagObjs = GameObject.FindGameObjectsWithTag(tagName);
+    //     var objs = tagObjs.Where(obj => GetHierarchyPath(obj.transform) == objPath);
+    //     if (objs.Count() > 1) Debug.LogError("同じタグの、同名同じパスの obj が複数あります。NW上で唯一のタグとパスにしてください:" + objs.First());
+    //     if (!objs.Any()) Debug.LogError("見つからない。objPath:" + objPath + ", tagName:" + tagName);
+    //     return objs.First().transform;
+    // }
 
-    private Transform GetTransform(int viewId, string tagName)
-    {
-        if (tagName == "Untagged") Debug.LogError("tag が設定されていません。objName:" + tagName);
-        GameObject obj = null;
-        var tagObjs = GameObject.FindGameObjectsWithTag(tagName);
-        for (int i = 0; i < tagObjs.Length; i++)
-        {
-            var view = tagObjs[i].GetComponent<PhotonView>();
-            if ((view != null) && (view.ViewID == viewId))
-                obj = tagObjs[i];
-        }
-        
-        if (obj == null) Debug.LogError("見つからない。viewId:" + viewId + ", tagName:" + tagName);
-        return obj.transform;
-    }
 
-    private Transform GetTransform(string objName, string tagName)
-    {
-        if (tagName == "Untagged") Debug.Log("tag が設定されていません。objName:" + objName);
-        var tagObjs = GameObject.FindGameObjectsWithTag(tagName);
-        var objs = tagObjs.Where(obj => obj.name == objName);
-        if (objs.Count() > 1) Debug.LogError("同じタグの同名 obj が複数あります。NW上で唯一の名前にしてください:" + objs.First());
-        if (!objs.Any()) Debug.LogError("見つからない。objName:" + objName + ", tagName:" + tagName);
-        return objs.First().transform;
-    }
-    
+
+    /////////////////////////////////////////////////////////////////////////////////////////
+    // Photonから呼ばれる奴
+    /////////////////////////////////////////////////////////////////////////////////////////
+
+    #region Photonから呼ばれる奴
+
+    //
+    //
+    // [PunRPC] // (Photonで呼ぶため直接呼ばないこと！)    
+    // public void Photon_SetParent_WithPath(string childPath, string childTag, string parentPath, string parentTag)
+    // {
+    //     var child = GetTransform(childPath, childTag);
+    //     var parent = GetTransform(parentPath, parentTag);
+    //     child.SetParent(parent, false);
+    // }
+
+    #endregion
+
+
     /////////////////////////////////////////////////////////////////////////////////////////
     // 別世界の PhotonManager と同期する内容
     /////////////////////////////////////////////////////////////////////////////////////////
@@ -215,7 +217,7 @@ public class PhotonManager :
 //         var childTag = trans.gameObject.tag;
 //         var parentTag = parent.gameObject.tag;
 //
-//         photonView.RPC("SetParentStr", RpcTarget.All, trans.name, childTag, parent.name, parentTag);
+//         photonView.RPC("SetParentStr", RpcTarget.AllViaServer, trans.name, childTag, parent.name, parentTag);
 //     }
 //
 //     // string だけで SetParent する天才的なメソッド
@@ -234,6 +236,13 @@ public class PhotonManager :
 //         child.transform.SetParent(parent.transform, false);
 //     }
 // }
+public static class PhotonViewExtension
+{
+    public static void SetName(this PhotonView photonView, string changeName)
+    {
+        photonView.gameObject.name = changeName;
+    }
+}
 
 // Photon カスタムプロパティ
 public class PhotonProperty : MonoBehaviour

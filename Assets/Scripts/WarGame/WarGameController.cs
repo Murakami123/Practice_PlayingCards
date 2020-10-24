@@ -23,7 +23,7 @@ public class WarGameController : BaseGameScene
     /////////////////////////////////////////////////////
     /// シーンのごとの処理
     /////////////////////////////////////////////////////
-    [SerializeField] private RectTransform HikiwakeCardPatent;
+    [SerializeField] private RectTransform HikiwakeCardParent;
 
     [SerializeField] private Transform playerParent;
     private DeckController deckController;
@@ -42,7 +42,7 @@ public class WarGameController : BaseGameScene
     {
         Debug.Log("photonViewId:" + "1002");
         Debug.Log("int.Parse(1002):" + int.Parse("1002"));
-        
+
         // 部屋がなければ作って入る
         Debug.Log("WarGameController.Start_1");
         await base.JoinOrCreateRoom();
@@ -88,24 +88,22 @@ public class WarGameController : BaseGameScene
             var player_1_Obj = PhotonManager.Instance.Instantiate(playerPrefabName, Vector3.zero, (Quaternion) default);
             var player_1_Rect = player_1_Obj.GetComponent<RectTransform>();
             player1 = player_1_Obj.GetComponent<PlayerController>();
-            // player1.name += "_Player1";
-            // PhotonManager.Instance.SetParent(player1.transform, playerParent);
-            PhotonManager.Instance.SetParent(player1.GetPhotonView(), playerParent);
+            player1.ChangeName("Photon_Player1");
+            player1.SetParent(playerParent);
             player_1_Rect.anchoredPosition = anchoredPos_Player1;
 
             var player_2_Obj = PhotonManager.Instance.Instantiate(playerPrefabName, Vector3.zero, (Quaternion) default);
             var player_2_Rect = player_2_Obj.GetComponent<RectTransform>();
             player2 = player_2_Obj.GetComponent<PlayerController>();
-            // player2.name += "_Player2";
-            // PhotonManager.Instance.SetParent(player2.transform, playerParent);
-            PhotonManager.Instance.SetParent(player2.GetPhotonView(), playerParent);
+            player2.ChangeName("Photon_Player2");
+            player2.SetParent(playerParent);
             player_2_Rect.anchoredPosition = anchoredPos_Player2;
         }
 
         // 山札生成
         var deckObj = PhotonManager.Instance.Instantiate(deckPrefabName, deckAnchoredPos);
-        PhotonManager.Instance.SetParent(deckObj.transform, deckParent);
         deckController = deckObj.GetComponent<DeckController>();
+        deckController.SetParent(deckParent);
         deckController.ResetDeck(useJokerCount);
 
         // 山札なくなるまで対戦繰り返し
@@ -145,10 +143,12 @@ public class WarGameController : BaseGameScene
                 Debug.Log("引き分け");
 
                 // 引き分け
-                var hikwakeCardPos = HikiwakeCardPatent.localPosition;
+                var hikwakeCardPos = HikiwakeCardParent.localPosition;
+                player1Card.SetParent(ObjTag.HikiwakeCardParent);
+                player2Card.SetParent(ObjTag.HikiwakeCardParent);
                 await (
-                    player1Card.MoveCard(HikiwakeCardPatent, hikwakeCardPos, isLittleShit: true),
-                    player2Card.MoveCard(HikiwakeCardPatent, hikwakeCardPos, isLittleShit: true)
+                    player1Card.MoveCard(hikwakeCardPos, isLittleShit: true),
+                    player2Card.MoveCard(hikwakeCardPos, isLittleShit: true)
                 );
             }
             else

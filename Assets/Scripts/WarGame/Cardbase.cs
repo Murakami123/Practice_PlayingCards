@@ -7,18 +7,18 @@ using Cysharp.Threading.Tasks;
 using Photon.Pun;
 using UnityEngine.Events;
 
-public abstract class Cardbase : MonoBehaviour, IPunObservable
+public abstract class Cardbase : PhotonMonobehaviour
 {
     [SerializeField] Image cardImage;
     [SerializeField] Sprite backSpr;
     private Sprite frontSpr;
     private RectTransform _rect;
     private RectTransform rectTransform => (_rect) ? _rect : _rect = GetComponent<RectTransform>();
-    private  readonly Vector3 rotation90 = new Vector3(0f, 90f, 0f);
-    
+    private readonly Vector3 rotation90 = new Vector3(0f, 90f, 0f);
+
     public virtual void Init(CardSoot soot, int cardNo, bool isShowFront = false)
     {
-        this.soot = soot;  
+        this.soot = soot;
         this.cardNo = cardNo;
         this.isShowFront = isShowFront;
         this.frontSpr = ResourceManager.Instance.GetSprite(soot, cardNo);
@@ -26,17 +26,18 @@ public abstract class Cardbase : MonoBehaviour, IPunObservable
         // position の調整は PhotonManager.Init 方で行ってください
     }
 
-    public async UniTask MoveCard(Transform cardParent, Vector3 movePos, bool isLittleShit = false)
+    public new void SetParent(ObjTag tag) => base.SetParent(tag);
+    public new void SetParent(PhotonView pv) => base.SetParent(pv);
+    public new void SetParent(Transform parent) => base.SetParent(parent);
+
+    public async UniTask MoveCard(Vector3 movePos, bool isLittleShit = false)
     {
-        // Hierarcy上の親変更
-        transform.SetParent(cardParent);
-        
         // 位置の移動
         if (isLittleShit)
         {
             var randomPosX = UnityEngine.Random.Range(-30f, 30f);
             var randomPosY = UnityEngine.Random.Range(-30f, 30f);
-            movePos += new Vector3(randomPosX, randomPosY,0f);
+            movePos += new Vector3(randomPosX, randomPosY, 0f);
         }
 
         await UniTask.Delay(200);
@@ -46,7 +47,7 @@ public abstract class Cardbase : MonoBehaviour, IPunObservable
     public async UniTask ReturnCard(bool isShowFront, bool isImmidiate = false)
     {
         // 表のカードをひっくり返して表、裏のカードをひっくり返して裏の挙動は必要なさそう
-        if(this.isShowFront == isShowFront) return;
+        if (this.isShowFront == isShowFront) return;
 
         // 裏返す
         {
@@ -74,9 +75,10 @@ public abstract class Cardbase : MonoBehaviour, IPunObservable
     /////////////////////////////////////////////////////////////////////
     /// タップや長押し関連
     /////////////////////////////////////////////////////////////////////
-
     [SerializeField] private GameObject sentakuzumiObj;
+
     public bool isChoiced { get; private set; } // カードが選択されてるかどうか
+
     public void SetChoice(bool isChoice)
     {
         isChoiced = isChoice;
@@ -84,31 +86,32 @@ public abstract class Cardbase : MonoBehaviour, IPunObservable
     }
 
     public void OnTap() => SetChoice(isChoice: true);
-    
+
     /////////////////////////////////////////////////////////////////////
     /// 同期したい内容
     /////////////////////////////////////////////////////////////////////
     public CardSoot soot { get; private set; }
+
     public int cardNo { get; private set; }
     public bool isShowFront { get; private set; }
 
-    void IPunObservable.OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
+    public override void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
     {
         if (stream.IsWriting)
         {
             // 送信側。
             // 同期したいデータを集めて SendNext() で送る。
-            stream.SendNext((int)soot);
+            stream.SendNext((int) soot);
             stream.SendNext(cardNo);
             stream.SendNext(isShowFront);
         }
         else
         {
             // 受信側。
-            soot = (CardSoot)stream.ReceiveNext();
-            cardNo = (int)stream.ReceiveNext();
-            isShowFront = (bool)stream.ReceiveNext();
-        }  
+            soot = (CardSoot) stream.ReceiveNext();
+            cardNo = (int) stream.ReceiveNext();
+            isShowFront = (bool) stream.ReceiveNext();
+        }
     }
 }
 

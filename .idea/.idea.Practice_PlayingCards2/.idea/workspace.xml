@@ -11,13 +11,17 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b478a8ed-63ea-428f-a59f-daed2dc2b478" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.Practice_PlayingCards2/.idea/contentModel.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Practice_PlayingCards2/.idea/contentModel.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Practice_PlayingCards2/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Practice_PlayingCards2/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Photon/PhotonUnityNetworking/Resources/PhotonServerSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Photon/PhotonUnityNetworking/Resources/PhotonServerSettings.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Photon/Resources/PhotonPrefab_Deck.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Photon/Resources/PhotonPrefab_Deck.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Photon/Resources/PhotonPrefab_Player.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Photon/Resources/PhotonPrefab_Player.prefab" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/PhotonPractice/PhotonManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/PhotonPractice/PhotonManager.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/WarGame/Cardbase.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/WarGame/Cardbase.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/WarGame/DeckController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/WarGame/DeckController.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/WarGame/PlayerController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/WarGame/PlayerController.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/WarGame/WarGameController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/WarGame/WarGameController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjectSettings/TagManager.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/TagManager.asset" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -29,6 +33,7 @@
   </component>
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/PhotonPractice/PhotonManager.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/PhotonPractice/PhotonMonobehaviour.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Util/DontDestrouOnLoad.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/AlgoGame/AlgoGameController.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/AlgoGame/PhotonCube.cs" root0="FORCE_HIGHLIGHTING" />
@@ -57,11 +62,12 @@
         <option value="$PROJECT_DIR$/Assets/Scripts/PhotonPractice/PhotonGameScene.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/AlgoGame/AlgoGameController.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/PhotonPractice/BaseGameScene.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/PhotonPractice/PhotonManager.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/WarGame/DeckController.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/PhotonPractice/PhotonMonobehaviour.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/WarGame/Cardbase.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/WarGame/PlayerController.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/WarGame/WarGameController.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/WarGame/Cardbase.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/WarGame/DeckController.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/PhotonPractice/PhotonManager.cs" />
       </list>
     </option>
   </component>
@@ -81,7 +87,7 @@
     <property name="node.js.path.for.package.tslint" value="project" />
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
     <property name="node.js.selected.package.tslint" value="(autodetect)" />
-    <property name="settings.editor.selected.configurable" value="ParameterNameHintsOptionsId" />
+    <property name="settings.editor.selected.configurable" value="preferences.sourceCode" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="RunManager" selected="Attach to Unity Editor.Attach to Unity Editor">
@@ -125,7 +131,9 @@
       <workItem from="1601503231050" duration="84000" />
       <workItem from="1601511186752" duration="31006000" />
       <workItem from="1602326965039" duration="33589000" />
-      <workItem from="1602611227134" duration="22882000" />
+      <workItem from="1602611227134" duration="23323000" />
+      <workItem from="1603513989162" duration="1857000" />
+      <workItem from="1603517073127" duration="15115000" />
     </task>
     <servers />
   </component>
@@ -154,15 +162,15 @@
       <screen x="-1920" y="0" width="1920" height="1160" />
     </state>
     <state x="-1206" y="449" key="#com.intellij.ide.actions.ChooseComponentsToExportDialog/-1920.0.1920.1160/0.0.1920.1160@-1920.0.1920.1160" timestamp="1601503006808" />
-    <state x="468" y="225" key="SettingsEditor" timestamp="1602319647461">
-      <screen x="0" y="0" width="1920" height="1160" />
+    <state x="-983" y="183" key="SettingsEditor" timestamp="1603534115453">
+      <screen x="-1920" y="0" width="1920" height="1160" />
     </state>
     <state x="-1452" y="225" key="SettingsEditor/-1920.0.1920.1160/0.0.1920.1160@-1920.0.1920.1160" timestamp="1601503079489" />
-    <state x="468" y="225" key="SettingsEditor/-1920.0.1920.1160/0.0.1920.1160@0.0.1920.1160" timestamp="1602319647461" />
-    <state x="92" y="92" width="1736" height="976" key="VCS.FileHistoryDialog" timestamp="1602350223599">
+    <state x="-983" y="183" key="SettingsEditor/-1920.0.1920.1160/0.0.1920.1160@0.0.1920.1160" timestamp="1603534115453" />
+    <state x="92" y="92" width="1736" height="976" key="VCS.FileHistoryDialog" timestamp="1603523649624">
       <screen x="0" y="0" width="1920" height="1160" />
     </state>
-    <state x="92" y="92" width="1736" height="976" key="VCS.FileHistoryDialog/-1920.0.1920.1160/0.0.1920.1160@0.0.1920.1160" timestamp="1602350223599" />
+    <state x="92" y="92" width="1736" height="976" key="VCS.FileHistoryDialog/-1920.0.1920.1160/0.0.1920.1160@0.0.1920.1160" timestamp="1603523649624" />
     <state x="640" y="185" width="640" height="829" key="find.popup" timestamp="1600691621718">
       <screen x="0" y="0" width="1920" height="1200" />
     </state>

@@ -5,9 +5,10 @@ using Cysharp.Threading.Tasks;
 using Photon.Pun;
 using UnityEngine;
 
-public class PlayerController : MonoBehaviour, IPunObservable
+public class PlayerController : PhotonMonobehaviour
 {
     [SerializeField] private RectTransform cardPosParent;
+    [SerializeField] private PhotonView cardPosParentPV;
     private List<Card> cardList = new List<Card>();
 
     // カードの入手
@@ -23,10 +24,10 @@ public class PlayerController : MonoBehaviour, IPunObservable
         for (int i = 0; i < cardList.Count; i++)
         {
             var card = cardList[i];
-            var parent = cardPosParent;
             if (card != null)
             {
-                card.MoveCard(parent, parent.localPosition).Forget();
+                card.SetParent(cardPosParent);
+                card.MoveCard(cardPosParent.localPosition).Forget();
             }
         }
     }
@@ -58,7 +59,8 @@ public class PlayerController : MonoBehaviour, IPunObservable
     ////////////////////////////////////////////
     /// WarGamePlayerController: PlayerControllerBase
     ////////////////////////////////////////////
-    [SerializeField] private RectTransform WinGetCardParent;
+    [SerializeField] private RectTransform winGetCardParent;
+    [SerializeField] private PhotonView winGetCardParentPV;
 
     public List<Card> winGetCardList { get; private set; } = new List<Card>();
 
@@ -66,25 +68,15 @@ public class PlayerController : MonoBehaviour, IPunObservable
     public async UniTask SetWinCard(Card winGetCard)
     {
         Debug.Log("勝者カード移動。winGetCard:" + winGetCard, this);
-        winGetCard.MoveCard(WinGetCardParent, WinGetCardParent.localPosition, isLittleShit: true);
+        winGetCard.SetParent(winGetCardParentPV);
+        winGetCard.MoveCard(winGetCardParent.localPosition, isLittleShit: true);
         winGetCardList.Add(winGetCard);
-    }
-
-    /////////////////////////////////////////////////////////////////////
-    /// Photon
-    /////////////////////////////////////////////////////////////////////
-    private PhotonView photonView;
-    public PhotonView GetPhotonView()
-    {
-        if (photonView == null) photonView = GetComponent<PhotonView>();
-        return photonView;
     }
 
     /////////////////////////////////////////////////////////////////////
     /// 同期したい内容
     /////////////////////////////////////////////////////////////////////
-    void IPunObservable.OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
+    public override void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
     {
-        PhotonManager.Instance.ChangeObjName(stream, gameObject);
     }
 }

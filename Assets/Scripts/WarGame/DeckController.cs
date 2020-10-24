@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Photon.Pun;
 using UnityEngine;
 
-public class DeckController : MonoBehaviour
+public class DeckController : PhotonMonobehaviour
 {
     private List<Card> cardList = new List<Card>();
     private readonly float cardThickness = 0.65f;
@@ -29,7 +29,11 @@ public class DeckController : MonoBehaviour
             var card = cardObj.GetComponent<Card>();
             var photonView = cardObj.GetComponent<PhotonView>();
             card.Init(shuffledCardList[i].Item1, shuffledCardList[i].Item2);
-            PhotonManager.Instance.SetParent(photonView, transform);
+
+            card.SetParent(photonView); // 親が PhotonView 持ってるのでこっち
+            // card.SetParent(transform); 
+
+            // PhotonManager.Instance.SetParent(photonView, transform);
             cardList.Add(card);
             instancePosY += cardThickness;
         }

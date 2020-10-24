@@ -41,6 +41,13 @@ MonoBehaviour:
   - SetParent
   - SetParentStr
   - SetParentPhoton
+  - Photon_ChangeName
+  - Photon_SetParent_WithId
+  - Photon_SetParent_WithPath
+  - Photon_SetParent
+  - Photon_SetParent_WithPhotonView
+  - Photon_SetParent_WithTag
+  - Photon_SetTag
   DisableAutoOpenWizard: 1
   ShowSettings: 0
   DevRegionSetOnce: 1

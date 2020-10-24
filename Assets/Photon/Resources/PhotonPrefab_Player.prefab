@@ -104,7 +104,7 @@ GameObject:
   - component: {fileID: 6776229007085782931}
   m_Layer: 0
   m_Name: WinCardParent
-  m_TagString: Untagged
+  m_TagString: Photon_WinCardParent
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -139,7 +139,7 @@ GameObject:
   - component: {fileID: 6776229007485322406}
   m_Layer: 0
   m_Name: CardPosParent
-  m_TagString: Untagged
+  m_TagString: Photon_CardParent
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
